@@ -12,8 +12,6 @@
 
 ##	Dependency
 
-https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp1.png
-
 *	![badge](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/Python-3.4%2B-brightgreen.svg)
 
 *	Pillow
@@ -51,16 +49,16 @@ https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/UST
 
 <table>
 	<tr>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p1.png" width="320"/></td>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp1.png" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p1.jpg" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp1.jpg" width="320"/></td>
 	</tr>
 	<tr>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p2.png" width="320"/></td>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp2.png" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p2.jpg" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp2.jpg" width="320"/></td>
 	</tr>
 	<tr>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p3.png" width="320"/></td>
-		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp3.png" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/p3.jpg" width="320"/></td>
+		<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp3.jpg" width="320"/></td>
 	</tr>
 </table>
 
@@ -100,8 +98,8 @@ https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/UST
 
 	<table>
 		<tr>
-			<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp4_rb.png" width="320"/></td>
-			<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp4_rb.png" width="320"/></td>
+			<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp4_rb.jpg" width="320"/></td>
+			<td><img src="https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/project/USTC60/demo/sp5_rb.jpg" width="320"/></td>
 		</tr>
 	</table>
 
