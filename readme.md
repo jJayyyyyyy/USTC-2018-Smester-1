@@ -62,3 +62,8 @@ TODO: 分类上传电子书
 
 (欢迎分享各种笔记和学习资源)
 
+<br>
+
+##	License
+
+[MIT License](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/LICENSE)
