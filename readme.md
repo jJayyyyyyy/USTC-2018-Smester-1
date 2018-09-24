@@ -38,6 +38,14 @@ It's my honor and pleasure to share my experience with you.
 		219.219.220.50	ssea.ustcsz.edu.cn
 		```
 
+	*	20180924注: 只要能确定文件路径，不需要登录即可GET课件资源，如修改Linux的hosts文件，然后
+	
+		```bash
+		$ wget http://ssea.ustcsz.edu.cn:443/UploadFiles/courseResources/20180917/1.%20Introduction%20to%20Bitcoin_201891713365697.pptx
+		```
+
+		即可获取区块链的相关课件
+
 <br>
 
 ##  我的课表
