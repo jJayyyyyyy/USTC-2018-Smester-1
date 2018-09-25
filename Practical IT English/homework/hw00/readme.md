@@ -85,9 +85,9 @@
 
 *	To begin with, we start our inquiry with time itself. We first study the history of time, like
 
-	*	the first sundials in ancient Egypt
-	*	early mechanical clocks, in the 16th century
-	*	the advent of time zones, in the 19th century
+	*	the first sundials in ancient Egypt, 日晷
+	*	early mechanical clocks, in the 16th century, 机械钟
+	*	the advent of time zones, in the 19th century, 时区
 
 	those are tools to define and calculate time.
 
@@ -107,16 +107,16 @@
 
 	![twitter-based-emotion-study](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/twitter-based-emotion-study.jpg)
 
-	*	positive / negative emotions vary over time
-	*	morning: active, engaged, and hopeful
-	*	in the afternoon, drop
-	*	in the early evening, climbed back up again
-	*	Positive affect was generally a bit higher on Saturdays and Sundays
-	*	The temporal affective pattern is similarly shaped across disparate cultures and geographic locations.
+	*	positive / negative emotions vary over time, 情绪会随时间变化
+	*	morning: active, engaged, and hopeful, 早上积极
+	*	in the afternoon, drop, 中午开始下降
+	*	in the early evening, climbed back up again, 傍晚开始回升
+	*	Positive affect was generally a bit higher on Saturdays and Sundays, 周末情绪更好
+	*	The temporal affective pattern is similarly shaped across disparate cultures and geographic locations. 不同地区、不同文化，总体趋势相同
 
 *	The patterns above are related to biological clocks, which control the rise and fall of our body temperature, regulates our hormones.
 
-	生物钟
+	上述规律和生物钟有关
 
 	Just like that plant, our physical and mental status open and close regularly, which can guide us on how we can configure our own daily lives.
 
@@ -129,6 +129,8 @@
 	People feel increasingly happy throughout the morning, less happy in the afternoon, and happier again in the evening, just like the findings from.
 
 	It also showed that during any given day people typically are least happy while commuting and most happy while canoodling.
+
+	上下班挤公交的时候不开心，canoodling/kiss的时候最开心
 
 	![DRM1](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/DRM1.jpg)
 
@@ -146,23 +148,37 @@
 	> a. Linda is a bank teller.
 	> b. Linda is a bank teller and is active in the feminist movement.
 
+	省略了相关背景描述，这个描述是说Linda是个很开朗乐观的姑娘，也就是说，这个背景描述是想混淆视听让你选b的
+
+	答案是a，因为a更加宽泛, more likely, 而b是a的子集, 增加了更多限制, 使得可能性下降了
+
 	Researchers have posed the Linda problem at different times of day, 
 
 	People were much more likely to get it right earlier in the day than later.
 
-	performance was generally strong in the beginning of the day, then worsened as the hours ticked by.
+	Performance was generally strong in the beginning of the day, then worsened as the hours ticked by.
+
+	研究者发现, 人们在早上更容易得出正确答案
 
 *	2. Stereotypes
 
 	A German psychologist found that people learned and remembered strings of nonsense syllables more effectively in the morning than at night.
 
+	大致是说, 给定几组拼写类似的名字, 在早上更容易区分清楚
+
 *	3. Scores of students
 
 	researches from Danish and LA schools also show that students get higher score in the morning.
 
+	在早上, 学生拿到的分数比下午的高
+
 *	But, not all brainwork is the same. innovation and creativity are greatest when we are not at our best
 
+	但是，并非所有问题都适合上午做。研究发现，某些创造性的活动, 在下午进行(当我们处于low emotion status 的时候)，效果更好
+
 *	In short, our moods and performance oscillate during the day. For most of us, mood follows a common pattern: a peak, a trough, and a rebound.
+
+	总结, 大多数人, 一天中都会经历情绪的几个变化阶段
 
 <br>
 
@@ -170,7 +186,7 @@
 
 *	Not all Human beings experience a day in the same way.
 
-	大致有三类人群
+	大致有三类人群, 人数大致服从高斯分布
 
 	there is a Gaussian distribution of larks, owls, third birds
 
@@ -184,37 +200,39 @@
 
 ####	5. Time Hacker's Handbook
 
-*	1. HOW TO FIGURE OUT YOUR DAILY WHEN: A THREE-STEP METHOD
+*	1. HOW TO FIGURE OUT YOUR DAILY-WHEN: A THREE-STEP METHOD
 
-	*	First, determine your chronotype: lark / owl / third bird
+	*	First, determine your chronotype: lark / owl / third bird, 先确定你是哪一类人
 
-	*	Second, determine what you need to do. Analysis / Creation, Insight
+	*	Second, determine what you need to do. Analysis / Creation, Insight, 再确定你要做哪一类工作
 
-	*	Look up the table
+	*	Look up the table, 根据下表查看合适的工作时间
 
 		![Daily-When-Chart](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/Daily-When-Chart.jpg)
 
-*	2. More precise and accurate way to get your daily when
+*	2. More precise and accurate way to get your daily-when, 更加精确的方式
 
-	*	track your behavior systematically for a week.
+	*	track your behavior systematically for a week. 系统地跟踪记录一周的活动
 
-		Set your phone alarm to beep every ninety minutes. 
+		Set your phone alarm to beep every ninety minutes. 每隔90分钟回答记录下面的问题
 
 		Each time you hear the alarm, answer these three questions:
 
-		*	What are you doing
-		*	On a scale of 1 to 10, how mentally alert do you feel right now?
-		*	On a scale of 1 to 10, how physically energetic do you feel right now?
+		*	What are you doing, 你在做什么
+		*	On a scale of 1 to 10, how mentally alert do you feel right now? 精神状态如何(1~10分)
+		*	On a scale of 1 to 10, how physically energetic do you feel right now? 身体状态如何(1~10分)
 
-*	3. WHAT TO DO IF YOU DON’T HAVE CONTROL OVER YOUR DAILY SCHEDULE
+*	3. WHAT TO DO IF YOU DON'T HAVE CONTROL OVER YOUR DAILY SCHEDULE
 
-	*	The harsh reality is that many of us don't have fully control of our time. For that, there are two strategies to minimize the harm
+	*	The harsh reality is that many of us don't have fully control of our time. For that, there are two strategies to minimize the harm, 现实很残酷, 每个人很难完全掌控自己的时间, 采取下面的方式, 可能会减少负面作用
 
-		*	Be aware.
+		*	Be aware. 意识到自己没有处于最佳状态
 
 			Simply knowing that you’re operating at a suboptimal time can be helpful because you can correct for your chronotype in small but powerful ways.
 
 			prepare in advance, take a walk and relax, help sb, repeat other's question
+
+			提前做好准备, 放松, 帮助他人, 在回答问题之前先重复别人的问题, 确保自己没有听错
 
 		*	Work the margins
 
@@ -222,20 +240,26 @@
 
 			If you have an free hour in the morning, don't waste it on emails. Take it to do the most important work.
 
-*	4. WHEN TO EXERCISE: THE ULTIMATE GUIDE
+			充分利用时间, 不要把自己的最佳时间浪费在查看邮件等琐碎的事情上
 
-	*	The answer depends in part on your goals.
+*	4. WHEN TO EXERCISE: THE ULTIMATE GUIDE, 什么时候去运动
+
+	*	The answer depends in part on your goals. 取决于你的目标
 
 	*	Morning: Lose weight, boost mood, keep a routine, build strength
 
+		早上: 减肥, 激活新的一天, 日常打卡
+
 	*	Afternoon, evening: avoid injury, perform your best, enjoy the workout a bit more
+
+		下午和晚上: 避免受伤(下午身体已经充分活动开了), 激烈运动, 充分享受运动的快乐
 
 *	5. four TIPS FOR A BETTER MORNING
 
-	*	Drink a glass of water when you wake up
-	*	Don’t drink coffee immediately after you wake up.
-	*	Soak up the morning sun.
-	*	Schedule talk-therapy appointments for the morning.
+	*	Drink a glass of water when you wake up, 起床之后喝水
+	*	Don’t drink coffee immediately after you wake up. 别喝咖啡(or 奶茶)
+	*	Soak up the morning sun. 沐浴阳光
+	*	Schedule talk-therapy appointments for the morning. 如果要看病, 最好早上去, 状态更好, 吸收更好
 
 <br>
 
@@ -256,7 +280,4 @@
 *	[47.7, ]Thomas Edison was a night owl who enabled other night owls.
 	
 	爱迪生是个夜猫子，他的灯泡材料就是他熬夜的时候试出来的，他发明的灯泡也成就了无数个夜猫子
-
-
-
 
