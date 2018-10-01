@@ -1,4 +1,3 @@
-#include <vector>
 #include <iostream>
 #include <ctime>	// http://www.cplusplus.com/reference/ctime/time/
 #include <iomanip>
@@ -24,7 +23,6 @@ string getsha256(string str){
 }
 
 
-
 // 将字节数组，转换成字符串
 // 举例
 // 41 -> 0x41 -> 65 -> A
@@ -38,38 +36,37 @@ string byte2str(string strByteArray){
 		ss<<(unsigned char)strtoul(strhex.c_str(), NULL, 16);
 	}
 	string s = ss.str();
-	// cout<<s<<'\n';
 	return s;
 }
 
 struct Block{
-	string timeStamp;
-	string prevBlockHash;		// byte array 的字符串形式
-	string hash;				// byte array 的字符串形式
-	string data;
+	string timeStamp;	// 时间戳, 记录区块生成的时间
+	string prevHash;	// 前一个区块的 hash, 是一个以字符串形式保存的字节数组 byte array
+	string currhash;	// 当前区块的 hash, 是一个以字符串形式保存的字节数组 byte array
+	string msg;		// 区块中存储的实际交易
 	Block * next;
 
-	Block(string msg, string _prevBlockHash){
+	Block(string _msg, string _prevHash){
+		timeStamp = to_string(0);
 		// time_t timer;
 		// time(&timer);
-		// timeStamp = (u64)timer;
-		timeStamp = to_string((u64)0);
-		prevBlockHash = _prevBlockHash;
-		data = msg;
+		// timeStamp = to_string( (u64)timer );
+		
+		prevHash = _prevHash;
+		msg = _msg;
 		getHash();
 		next = NULL;
 	}
 
-	string getHash(){
-		string headers = byte2str(prevBlockHash) + data + timeStamp;
-		hash = getsha256(headers);
-		return hash;
+	void getHash(){
+		string data = byte2str(prevHash) + msg + timeStamp;
+		currhash = getsha256(data);
 	}
 };
 
 struct BlockChain{
 	Block *head, *tail;
-	int size;
+	size_t size;
 
 	BlockChain(){
 		head = new Block("Genesis Block", "");
@@ -78,9 +75,9 @@ struct BlockChain{
 	}
 
 	int addBlock(string msg){
-		cout<<"prev hash:\t"<<tail->hash<<'\n';
+		cout<<"prev hash:\t"<<tail->currhash<<'\n';
 		cout<<"curr data:\t"<<msg<<'\n';
-		tail->next = new Block(msg, tail->hash);
+		tail->next = new Block(msg, tail->currhash);
 		tail = tail->next;
 		size++;
 	}
@@ -91,13 +88,12 @@ int main(int argc, char *argv[]){
 	bc->addBlock("send 1 BTC to Ivan");
 	bc->addBlock("send 2 more BTC to Ivan");
 
-
 	cout<<"\n\n\n";
 	Block * p = bc->head;
 	for( int i = 0; i < bc->size; i++ ){
-		cout<<"prev hash: "<<p->prevBlockHash<<'\n';
-		cout<<"curr data: "<<p->data<<'\n';
-		cout<<"curr Hash: "<<p->hash<<"\n\n\n";
+		cout<<"prev hash: "<<p->prevHash<<'\n';
+		cout<<"curr data: "<<p->msg<<'\n';
+		cout<<"curr Hash: "<<p->currhash<<"\n\n\n";
 		p = p->next;
 	}
 

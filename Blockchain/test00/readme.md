@@ -16,13 +16,13 @@
 
 ##	总结整理
 
-本次实验体现的中心思想就是计算 `validHash = sha256(header)`
+本次实验体现的中心思想就是计算 `validHash = sha256(data)`
 
 *	对于 `Prototype`
 
 	```
-	header := prevHash + msg + timestamp
-	validHash = sha256(header)
+	data := prevHash + msg + timestamp
+	validHash = sha256(data)
 	```
 
 	`Prototype` 仅作展示，对 `validHash` 没有限制，所以创建成本很低
@@ -30,16 +30,16 @@
 *	增加 `PoW`
 
 	```
-	header = prevHash + msg + timestamp + targetBits + nonce
-	hash = sha256(header)
+	data = prevHash + msg + timestamp + targetBits + nonce
+	hash = sha256(data)
 	validHash = validate(hash)
 	```
 
 	增加了 `PoW` 之后，我们对 `validHash` 就有了限制，即，`validHash` 的二进制形式的前 `targetBits` 位必须是 `0`
 
-	由于 `prevHash`, `targetBits` 都是确定的值，而当我们在某个时间点准备创建新的 `block` 时，`timestamp` 也就确定了。于是，只有改变 `nonce` 才能改变输入量 `header` ，进而改变 `sha256(header)` 的结果
+	由于 `prevHash`, `targetBits` 都是确定的值，而当我们在某个时间点准备创建新的 `block` 时，`timestamp` 也就确定了。于是，只有改变 `nonce` 才能改变 `data` ，进而改变 `sha256(data)` 的结果
 
-	所以，我们需要对输入量中的 `nonce` 进行遍历搜索，再进行 `sha256(header)` ，试图找到一个符合要求的 `validHash`
+	所以，我们需要对输入量中的 `nonce` 进行遍历搜索，再进行 `sha256(data)` ，试图找到一个符合要求的 `validHash`
 
 	这个过程就是挖矿 (mining)，挖矿比较耗时耗力，是你的工作量证明(Proof of Work)
 
