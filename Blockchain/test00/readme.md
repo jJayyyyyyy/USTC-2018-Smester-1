@@ -53,6 +53,36 @@
 
 <br>
 
+##	测试运行
+
+*	开发环境
+
+	```
+	Ubuntu 16.04
+	go version go1.8.3 linux/amd64
+	g++ 4.8.4
+	```
+
+	推荐使用 `Cloud9` 之类的云平台, 各种开发环境都有，不需要手动安装
+
+*	`Go`
+
+	通过 `Ternimal` 进入每一小节当中的 `go` 目录，然后运行该目录下的 `run.sh` 脚本
+
+	```bash
+	$ ./run.sh
+	```
+
+*	`C++`
+
+	通过 `Ternimal` 进入每一小节当中的 `cpp` 目录，然后运行该目录下的 `run.sh` 脚本
+
+	```bash
+	$ ./run.sh
+	```
+
+<br>
+
 ##	参考资料
 
 *	[Building Blockchain in Go](https://jeiwan.cc/)
