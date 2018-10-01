@@ -76,7 +76,7 @@ struct BlockChain{
 
 	int addBlock(string msg){
 		cout<<"prev hash:\t"<<tail->currhash<<'\n';
-		cout<<"curr data:\t"<<msg<<'\n';
+		cout<<"curr msg:\t"<<msg<<'\n';
 		tail->next = new Block(msg, tail->currhash);
 		tail = tail->next;
 		size++;
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]){
 	Block * p = bc->head;
 	for( int i = 0; i < bc->size; i++ ){
 		cout<<"prev hash: "<<p->prevHash<<'\n';
-		cout<<"curr data: "<<p->msg<<'\n';
+		cout<<"curr msg: "<<p->msg<<'\n';
 		cout<<"curr Hash: "<<p->currhash<<"\n\n\n";
 		p = p->next;
 	}
