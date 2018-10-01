@@ -44,6 +44,33 @@
 
 <br>
 
+##	运行结果
+
+*	为了方便对照，我们手动把 `go` 和 `c++` 代码中的 `timeStamp` 设为 `0`，于是可以得到如下结果
+
+	```
+	区块1(Genesis Block)
+	prev hash: 
+	curr data: Genesis Block
+	curr Hash: 8500b59bb5271135cd9bcbf0afd693028d76df3b9c7da58d412b13fc8a8f9394
+
+
+	区块2
+	prev hash: 8500b59bb5271135cd9bcbf0afd693028d76df3b9c7da58d412b13fc8a8f9394
+	curr data: send 1 BTC to Ivan
+	curr Hash: 714ca13ff1247ff5a2309180be5147960abd1fb139d2506ad26a695cd5d28679
+
+
+	区块3
+	prev hash: 714ca13ff1247ff5a2309180be5147960abd1fb139d2506ad26a695cd5d28679
+	curr data: send 2 more BTC to Ivan
+	curr Hash: 9c08aa5d4cbf5ff2cee5153e70cafc53d3009b0e61ce8fe6c7105a7eace3880d
+	```
+
+	后续使用时，把 `timeStamp` 重新设为当前时间戳即可
+
+<br>
+
 ##	参考链接
 
 *	[ctime](http://www.cplusplus.com/reference/ctime/time/)
