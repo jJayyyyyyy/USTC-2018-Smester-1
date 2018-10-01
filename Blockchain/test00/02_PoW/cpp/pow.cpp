@@ -72,14 +72,14 @@ const size_t targetBits = 8;
 struct Block{
 	u64 nonce;
 	u64 timeStamp;
-	string data;
+	string msg;
 	string prevHash;		// byte array 的字符串形式
 	string currHash;		// byte array 的字符串形式
 	string strHexTargetHash;
 	Block * next;
 
-	Block(string msg, string pH){
-		data = msg;
+	Block(string _msg, string pH){
+		msg = _msg;
 		prevHash = pH;
 
 		// 测试一致性
@@ -108,10 +108,10 @@ struct Block{
 	}
 
 	void mining(){
-		cout<<"Mining the block containing \""<<data<<"\"\n";
+		cout<<"Mining the block containing \""<<msg<<"\"\n";
 		for( u64 tmpNonce = 0; tmpNonce < maxNonce; tmpNonce++ ){
-			string headers = prepareData( tmpNonce );
-			string tmpHash = getsha256(headers);
+			string data = prepareData( tmpNonce );
+			string tmpHash = getsha256(data);
 
 			// https://wizardforcel.gitbooks.io/golang-stdlib-ref/content/81.html#Int.Cmp
 			if( tmpHash < strHexTargetHash ){
@@ -127,16 +127,16 @@ struct Block{
 	string prepareData(u64 tmpNonce){
 		// prototype 中, timestamp 是 strconv.FormatInt(b.TimeStamp, 10)
 		// 这里变成了 hex
-		string headers = byteArr2str(prevHash) + data +
+		string data = byteArr2str(prevHash) + msg +
 					byteArr2str(int2hex(timeStamp)) +
 					byteArr2str(int2hex(targetBits)) +
 					byteArr2str(int2hex(tmpNonce));
-		return headers;
+		return data;
 	}
 
 	bool validate(){
-		string headers = prepareData(nonce);
-		string tmpHash = getsha256(headers);
+		string data = prepareData(nonce);
+		string tmpHash = getsha256(data);
 		return tmpHash < strHexTargetHash;
 	}
 };
@@ -167,7 +167,7 @@ int main(int argc, char *argv[]){
 	Block * p = bc->head;
 	for( size_t i = 0; i < bc->size; i++ ){
 		cout<<"prev hash: "<<p->prevHash<<'\n';
-		cout<<"curr data: "<<p->data<<'\n';
+		cout<<"curr msg: "<<p->msg<<'\n';
 		cout<<"curr Hash: "<<p->currHash<<'\n';
 		cout<<"PoW: "<<p->validate()<<"\n\n\n";
 		p = p->next;
