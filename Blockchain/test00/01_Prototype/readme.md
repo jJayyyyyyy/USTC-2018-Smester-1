@@ -53,3 +53,7 @@
 *	[how-to-use-openssls-sha256-functions](https://stackoverflow.com/questions/13784434/how-to-use-openssls-sha256-functions)
 
 *	[sha256-hash-calculator](https://www.xorbin.com/tools/sha256-hash-calculator)
+
+*	[converting-a-hex-string-to-a-byte-array](https://stackoverflow.com/questions/17261798/converting-a-hex-string-to-a-byte-array)
+
+*	[cplusplus reference, strtoul](http://www.cplusplus.com/reference/cstdlib/strtoul/?kw=strtoul)
