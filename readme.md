@@ -46,6 +46,14 @@ It's my honor and pleasure to share my experience with you.
 
 		即可获取区块链的相关课件
 
+	*	20181001注：晚上8点开始，教辅系统无法登陆，而且国庆期间似乎没有值班人员，无法修复问题。
+
+		问题在于，国庆期间还有需要提交的作业，而且作业只能通过教辅系统提交。这就非常尴 ~~(kēng)~~ 尬 ~~(diē)~~ 了。
+
+		<!-- 怎么感觉自己来到了一所yeji学校 -->
+
+		因此，建议每次作业都尽早提交，并在本地创建副本(题目、格式要求、作业内容等，并上传到 GitHub，这样至少有时间戳证明你是已经做过作业的)
+
 <br>
 
 ##  我的课表
@@ -60,13 +68,22 @@ It's my honor and pleasure to share my experience with you.
 
 <br>
 
-##	电子书
+##	电子书、其他资源
+
+*	周再达同学整理的人脸识别，目标检测和目标追踪的论文以及对应的论文解读
+
+	*	https://zhuanlan.zhihu.com/p/44093862
+	*	https://zhuanlan.zhihu.com/p/36402362
+	*	https://zhuanlan.zhihu.com/p/44781302
 
 TODO: 分类上传电子书
 
 <br>
 
 ##  Contributors
+
+*	周再达
+
 
 (欢迎分享各种笔记和学习资源)
 
