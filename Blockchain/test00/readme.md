@@ -91,4 +91,12 @@
 
 *	[blockchain_go, 实验文档](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Blockchain/test00/blockchain_go.pdf)
 
+*	[SHA-256 hash calculator](https://www.xorbin.com/tools/sha256-hash-calculator)
+
+*	[hex 2 ascii](https://www.rapidtables.com/convert/number/hex-to-ascii.html)
+
+*	[crypto/sha256, golang](https://golang.org/pkg/crypto/sha256/)
+
+*	[crypto/sha256, 腾讯云](https://cloud.tencent.com/developer/section/1140766)
+
 <br>
