@@ -105,7 +105,7 @@
 
 *	Findings / Patterns:
 
-	![twitter-based-emotion-study](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/twitter-based-emotion-study.jpg)
+	![twitter-based-emotion-study](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/twitter-based-emotion-study.jpg)
 
 	*	positive / negative emotions vary over time, 情绪会随时间变化
 	*	morning: active, engaged, and hopeful, 早上积极
@@ -132,11 +132,11 @@
 
 	上下班挤公交的时候不开心，canoodling/kiss的时候最开心
 
-	![DRM1](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/DRM1.jpg)
+	![DRM1](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/DRM1.jpg)
 
-	![DRM2](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/DRM2.jpg)
+	![DRM2](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/DRM2.jpg)
 
-	![DRM3](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/DRM3.jpg)
+	![DRM3](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/DRM3.jpg)
 
 <br>
 
@@ -190,7 +190,7 @@
 
 	there is a Gaussian distribution of larks, owls, third birds
 
-	![birds](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/birds.jpg)
+	![birds](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/birds.jpg)
 
 	In short, all of us experience the day in three stages, a peak, a trough, and a rebound. But not all of us has the same biological clock. It's a good idea to find one that suit yourself.
 
@@ -208,7 +208,7 @@
 
 	*	Look up the table, 根据下表查看合适的工作时间
 
-		![Daily-When-Chart](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw00/assets/Daily-When-Chart.jpg)
+		![Daily-When-Chart](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20IT%20English/homework/hw01/assets/Daily-When-Chart.jpg)
 
 *	2. More precise and accurate way to get your daily-when, 更加精确的方式
 

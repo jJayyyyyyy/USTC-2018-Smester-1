@@ -64,6 +64,6 @@
 
 *	运行结果截图
 
-	![sphere](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/homework/hw00/assets/sphere.jpg)
+	![sphere](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/homework/hw01/assets/sphere.jpg)
 
 <br>
