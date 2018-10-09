@@ -437,3 +437,9 @@
 *	[csapp-3e-solutions](https://dreamanddead.gitbooks.io/csapp-3e-solutions/)
 
 *	[C语言中的逻辑右移和算术左移](https://blog.csdn.net/zyings/article/details/47084485)
+
+	Special Thanks to 小徐同学
+
+*	[Floating-point arithmetic, Wikipedia](https://en.wikipedia.org/wiki/Floating_point)
+
+*	[Denormal number, Wikipedia](https://en.wikipedia.org/wiki/Denormal_number)
