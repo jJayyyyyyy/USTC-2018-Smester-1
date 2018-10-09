@@ -1,0 +1,403 @@
+##	题源: `CSAPP` 第三版第二章
+
+<!--吐槽：中文版翻译质量堪忧，如 `2.58` 的 `procedure`，在当前语境应该是 `程序` 的意思，却译成了 `过程`。更糟糕的是。。`2.57` 的 `procedure` 对应的中文翻译是 `程序`。这该不会是传说中的佛系翻译吧-->
+
+*	2.58
+
+	Write a procedure `is_little_endian` that will return 1 when compiled and run on a little-endian machine, and will return 0 when compiled and run on a big-endian machine. This program should run on any machine, regardless of its word size.
+
+	编写程序 `is_little_endian` ，当它在小端系统上编译运行后，返回的值是 `1`，当它在大端系统上编译运行后，返回的值是 `0`。要求这个程序可以运行在任何机器上，无论机器的字长是多少。
+
+	```c
+	#include <stdio.h>
+	
+	int is_little_endian(){
+		unsigned short a = 0x0012;
+		unsigned char * p = (unsigned char *) & a;
+		if( p[0] == 0x12 ){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	
+	int main(){
+		printf("%d\n", is_little_endian());
+		return 0;
+	}
+	```
+
+	<br>
+
+*	2.61
+
+	Write C expressions that evaluate to 1 when the following conditions are true and to 0 when they are false. Assume x is of type `int`.
+
+	对于下列描述，分别写出对应的C语言表达式，使其值为 `1`，而在其他情况下，值为 `0`，假设 `x` 是 `int` 类型的变量。
+
+	*	A. `x` 的任何位都等于 `1`
+	
+		```c
+		!(x+1);
+
+		// 若 x 的任何位都为 1
+		// 则 x + 1 会溢出, 得到全 0 
+		// (x+1) 为假, !(x+1) 为真
+		```
+
+	*	B. `x` 的任何位都等于 `0`
+
+		```
+		!x;
+
+		// 若 x 全 0
+		// 则 x 为假, !x 为真
+		```
+
+	*	C. `x` 的最低有效字节中的任何位都等于 `1`
+
+		```c
+		(x & 0xff) + 1 ) >> 8;
+
+		// 先取 x 的最低 8 bit, (x & 0xff), 设为 y
+		// 若 y 全为 1, 则 y+1 会有进位, 即0x100
+		// 否则 y+1 只在低 8 bit 有非0数字, 高位都是 0
+		// 记 z = y + 1
+		// 再将 z 右移 8 bit, 也就是仅保留最高位其进位
+		// 若最高位有进位, 说明 x 的最低有效字节中的任何位都等于 1
+		```
+
+	*	D. `x` 的最高有效字节中的任何位都等于 `0`
+
+		```c
+		!( ( x >> ( (sizeof(int) - 1) << 3) ) & 0xff );
+
+		// 首先获取 x 的最高有效字节
+		// 若 int 为 16 bit
+		// 则 (sizeof(int) - 1) << 3 :== 8
+		// (x >> 8) & 0xff 即为 x 的高 8 位，设为 y
+		// 若 int 为 32 bit
+		// 则 (sizeof(int) - 1) << 3 :== 24
+		// (x >> 24) & 0xff 即为 x 的高 8 位，设为 y
+		//
+		// 最后，若 y 全为 0, 则 !y 为 1
+		// 若 y 不全为 0, 则 !y 为 0
+		```
+
+	<br>
+
+*	2.77
+	
+	Suppose we are given the task of generating code to multiply integer variable x by various different constant factors K. To be efficient, we want to use only the operations `+`, `-`, and `<<`. For the following values of K, write C expressions to perform the multiplication using at most three operations per expression.
+
+	假设我们有一个任务，生成一段代码，将整数变量 `x` 乘以不同的常数因子 `K`。为了提高效率，我们只想使用 `+`, `-`, `<<` 运算。对于下列 `K` 值，写出执行惩罚运算的 `C` 语言表达式，每个表达式最多使用 3 个运算
+
+	*	K = 17
+
+		```c
+		// x * 17 == x + x * 16
+		x + (x << 4);
+		```
+
+	*	K = -7
+
+		```c
+		// x * (-7) == x - x * 8
+		x - (x << 3);
+		```
+
+	*	K = 60
+
+		```c
+		// x * 60 == x * 64 - x * 4
+		(x << 6) - (x << 2);
+		```
+
+	*	K = -112
+
+		```c
+		// x * -112 = x * 16 - x * 128
+		(x << 4) - (x << 7);
+		```
+
+	<br>
+
+*	2.84
+
+	Fill in the return value for the following procedure, which tests whether its first  argument is less than or equal to its second. Assume the functino f2u returns an unsigned 32-bit number having the same bit representation as its floating-point argument. You can assume that neither argument is `NaN`, The two flavors of zero, `+0` and `-0`, are considered equal.
+
+	填写下列程序的返回值。这个程序测试它的第一个参数是否小于等于第二个参数。假定函数 `f2u` 返回一个无符号32位整数，它的和原浮点数有相同的二进制表示形式。你可以假设两个参数都不是 `NaN`，而且假设两种 `0`，即 `+0` 和 `-0` 是相等的。
+
+	```c
+	int float_le(float x, float y){
+		unsigned ux = f2u(x);
+		unsigned uy = f2u(y);
+
+		/* Get the sign bits */
+		unsigned sx = ux >> 31;
+		unsigned sy = uy >> 31;
+
+		/* Give an expression using only ux, uy, sx, and sy */
+		return	( !( ux & 0x7fffffff ) && !( uy & 0x7fffffff ) ) ||	// 1. 0 <= 0, 除了符号位, 其他位全为0
+				( sx && !sy ) ||									// 2. 负数 <= 正数
+				( !(sx - sy) && ( (ux - uy) >> 31 ) );				// 3. 符号相同, ux - uy <= 0, 则 x <= y
+	}
+	```
+
+	<br>
+
+*	2.89
+
+	We are running programs on a machine where values of type int have a 32-bit two's-complement representation. Values of type float use the 32-bit IEEE format, and values of type double use the 64-bit IEEE format.
+
+	We generate arbitrary integer values x, y, and z, and convert them to values of type double as follows:
+
+	```c
+	/* Create some arbitarary values */
+	int x = random();
+	int y = random();
+	int z = random();
+	/* Convert to double */
+	double dx = (double) x;
+	double dy = (double) y;
+	double dz = (double) z;
+	```
+
+	for each of the following C expressions, you are to indicate whether or not the expression always yields 1. If it always yields 1, describe the underlying mathematical principles. Otherwise, give an example of arguments that make it yield 0. Note that you cannot use an IA32 machine running `GCC` to test your answers, since it would use the 80-bit extended-precision representation for both float and double.
+
+	```c
+	A. (float) x == (float) dx;
+
+	true
+
+	1. 32-bit float 最多 24 位有效位数, 而 64-bit double 最多有 54 位有效位数, 
+
+	2. 设 x 的有效位数为 significand,
+
+	3. 当 significand <= 24 时, float 和 double 都能保留 x 的准确值
+
+	4. 当 24 < significand <= 32 < 54 时, x 被 cast 成 float 时, 多出来的有效位数会被 rounded
+
+	5. 而当 x 被 cast 成 double 时，虽然能够保留 x 的准确值, 但是当 dx 再被 cast 成 float 时, 多出来的有效位数也会按照和 4 相同的规则被 rounded,
+
+	6. 所以最后结果是相同的
+
+	举例，设 int x = 0x7fffffff;
+
+	即 x = (0111 1111 1111 1111 1111 1111 1111 1111)2 = (1.11 ....)(2) * (2 ^ 30)
+
+	float f1 = (float) x = (1.000 ... 0000)(2) * 2 ^ 31
+
+	f1 在内存中的表示形式为 0x4f 00 00 00
+
+	超过了最大有效位数，rounded
+
+
+	而 double dx = (double) x = (1.11 ....)(2) * (2 ^ 30)
+
+	在内存中的表示形式为 0x41 DF FF FF FF C0 00 00
+
+	dx 在被 cast 成为 float 之后的结果，和f1 一样，是 0x4f 00 00 00
+
+
+
+	From int or float•to double, the exatt numeric value can be preserved because double has both greater range (i:e.;the range of representable values), as well as greaterprecision (i.e.; the number of ;ignificant bits).
+
+	当 x float 放不下，会进行 rounding
+
+	可以放入 32-bit int 的所有有效数字。但是当 d 被 cast 成 float 类型时，会进行相同的 rounding, 所以最后结果是一样的
+
+	举例, int x = 0x7fffffff, 这里 int x 有 31 位有效数字
+
+
+	false, 当  时不成立, 理由如下
+
+	x = (0111 1111 1111 1111 1111 1111 1111 1111)2 = (1.11 ....) * (2 ^ 30)
+
+	
+	float f1 = (float) x = 1.000 ... 0000 (2) * 2 ^ 31
+
+	float f2 = (float) dx
+
+	```
+
+	```c
+	B. dx - dy == (double) (x - y);
+	
+	false, 设
+	
+	int x = 0x80000000;
+	int y = 0x7fffffff;
+	double dx = (double) x;
+	double dy = (double) y;
+
+	printf("%lf\n", dx-dy);				// -4294967295.000000
+	printf("%lf\n", (double)(x-y));		// 1.000000
+	
+	dx - dy != (double)(x - y)
+	```
+
+
+
+	C. (dx + dy) + dz == dx + (dy + dz);
+
+	```c
+	true,
+
+	一般来说, double不满足结合律, 主要是因为 rounding, 比如书中的例子
+	(3 + 1e10) - 1e10 != 3 +(1e10 - 1e10)
+
+	是因为(单精度)
+
+	1e10     = 10 0101 0100 0000 1011 1110 0100 0000 0000
+	3        = 00 0000 0000 0000 0000 0000 0000 0000 0011
+
+	3 + 1e10 = [10 0101 0100 0000 1011 1110 01] 00 0000 0011
+
+	由于 float 的 significand 只有 23 所以在 rounding 的时候会将最后的 [00 0000 0011] 舍去, 即丢失了精度
+
+	但是这里我们用到的是 double, 其 significand 有 52, 足够放下来自 32-bit int 的所有有效位, 因此在本题条件下, 结合律成立
+	```
+
+	<br>
+
+	D. (dx * dy) * dz == dx * (dy * dz);
+
+	```c
+	false, 加法最多增加一个有效位，double肯定能够，但是乘法可能是有效位加倍，如果原来有 30 个有效位，那么新的结果最多就有 60 个左右的有效位，double就可能放不下了
+
+	int x = 0x55555555;
+	int y = 0x7fffffff;
+	int z = 0x7fffffff;
+	double dx = (double) x;
+	double dy = (double) y;
+	double dz = (double) z;
+	
+	printf("%lf\n", (dx * dy) * dz);	// 660234686850255 07 00000000000.000000
+	printf("%lf\n", dx * (dy * dz));	// 660234686850255 18 00000000000.000000
+
+	```
+
+	E. dx / dx == dz / dz;
+
+	```c
+	当 int x = 0, z = 1; 时
+	dx / dx 结果是 INF
+	dz / dz 结果是 1.000000
+	```
+
+*	2.91
+
+	Around 250 B.C., the Greek Mathematician Archimedes proved that 233/71 < π < 22/7. Had he had access to a computer and the standard library <math.h>, he would have been able to determine that the single-precision floating-point approximation of π has the hexadecimal representation 0x40490FDB. Of course, all of these are just approximations, since π is not rational.
+
+	*	A. What is the fractional binary number denoted by this floating-point value 0x40490FDB?
+
+		0x40490FDB = 0100 0000 0100 1001 0000 1111 1101 1011 (2)
+		           = 0	1000 0000	1 0010 0100 0011 1111 0110 11
+		exp = 1000 0000 = 128
+		E = exp - bias = 128 - 127 = 1
+		frac = 100 1001 0000 1111 1101 1011
+
+		val = 1.100 1001 0000 1111 1101 1011 * 2^1
+		    = 11.00 1001 0000 1111 1101 1011
+
+		    = (1+1/2+1/16+1/128+1/4096+1/8192+1/16384+1/32768+1/65536+1/131072+1/524288+1/1.04858e+006+1/4.1943e+006+1/8.38861e+006) * 2
+		    = (1.5707963705028476083540228868125) * 2
+		    = 3.141592741005695216708045773625
+		
+	```
+
+	```
+
+	*	B. What is the fractional binary representation of 22/7? Hint: See Problem 2.83
+
+		1/7 = 1/111 (2) = 0.001 001 001 001 ...
+
+		22/7 = 3 + 1/7 = 11 + 1/111 (2) = 11.001 001 001 001...
+
+		10/71 = 1010/1000111 (2) = 0.001 001 000001 ...
+
+
+	*	C. At what bit postion (relative to the binary point) do these two approximation to π diverge?
+
+		binval(0x40490FDB) = 11.0010 0100 0011 1111 0110 11 (2)
+
+		binval(22/7)       = 11.0010 0100 1001 0010 0100 10 ... (2)
+
+		binval(233/71)     = 11.0010 0100 0001 ... (2)
+
+		在二进制中，从第小数点后第9位开始不同
+
+https://bbs.csdn.net/topics/390210659
+
+
+
+bias 为了能够表示大数和小数
+2^E
+bias = 2 ^ (k-1) - 1
+如 k = 8，则 bias = 2^7 - 1 = 127
+unsigned exp = E + bias 
+
+如 15213 = 0011 1011 0110 1101 (2) = 1.1 1011 0110 1101 (2) * 2^13
+那么 E = 13
+exp = E + bias = 13 + 127 = 140 = 1000 1100(2)
+
+M		= 1.1 1011 0110 1101 (2)
+frac	=   1 1011 0110 1101 (2)
+
+float f = 15213 = [0]	[1000 1100]	[1 1011 0110 1101 0000 0000 00]
+
+
+
+
+test 2.84
+
+#include <stdio.h>
+
+unsigned f2u(float x) {
+  return *(unsigned*)&x;
+}
+
+int float_le(float x, float y){
+	unsigned ux = f2u(x);
+	unsigned uy = f2u(y);
+	/* Get the sign bits */
+	unsigned sx = ux >> 31;
+	unsigned sy = uy >> 31;
+	/* Give an expression using only ux, uy, sx, and sy */
+
+	// 
+	// +0.0f
+	// 0 [0000 0000] [000 0000 0000 0000 0000 0000]
+	// -0.0f
+	// 1 [0000 0000] [000 0000 0000 0000 0000 0000]
+	// 除了符号位, 其他全为 0, 即 !(ux & 0x7fffffff) => !0 = 1
+	return	( !( ux & 0x7fffffff ) && !( uy & 0x7fffffff ) ) ||	// 0. 0 <= 0, 除了符号位, 其他位全为0
+			( sx && !sy ) ||									// 1. 负数 <= 正数
+			( !(sx - sy) && ( (ux - uy) >> 31 ) );				// 2. 符号相同, ux - uy <= 0, 则 x <= y
+}
+
+float u2f(unsigned x){
+	return *(float *)&x;
+}
+
+int main(){
+	// unsigned x = f2u(+0.000000001f);
+	
+	// printf("%x\n", x);
+	printf("%d\n", float_le(-0.0f, +0.0f));	// 1
+	printf("%d\n", float_le(+0.0f, -0.0f));	// 1
+	printf("%d\n", float_le(+0.0f, -1.0f));	// 0
+	printf("%d\n\n", float_le(+0.0f, 1.0f));	// 1
+	
+	printf("%d\n\n", float_le(1.0f, 0.0f));	// 0
+	
+	printf("%d\n", float_le(2.5f, 2.5f));	// 1
+	printf("%d\n", float_le(2.5f, 3.5f));	// 1
+	printf("%d\n\n", float_le(2.5f, 1.5f));	// 0
+	
+	printf("%d\n", float_le(-2.5f, -2.5f));	// 1
+	printf("%d\n", float_le(-2.5f, -3.5f));	// 1
+	printf("%d\n\n", float_le(-2.5f, -1.5f));	// 0
+	return 0;
+}
