@@ -44,7 +44,7 @@ It's my honor and pleasure to share my experience with you.
 		$ wget http://ssea.ustcsz.edu.cn:443/UploadFiles/courseResources/20180917/1.%20Introduction%20to%20Bitcoin_201891713365697.pptx
 		```
 
-		即可获取区块链的相关课件
+		即可获取区块链的相关课件(注：课程作业也可以通过这种方式下载，无需验证，所以理论上你可以通过brute force获得所有人提交的作业)
 
 	*	20181001注：晚上8点开始，教辅系统无法登陆，而且国庆期间似乎没有值班人员，无法修复问题。
 
