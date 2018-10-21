@@ -26,6 +26,10 @@
 
 *	[Big-O Complexity Cheat Sheet](http://www.bigocheatsheet.com/)
 
+*	[Gifox](https://gifox.io/)
+
+	在 `Mac OS` 中录制 `gif` 的好工具
+
 <br>
 
 ##	其他
