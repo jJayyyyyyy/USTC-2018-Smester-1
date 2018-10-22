@@ -49,7 +49,7 @@
 
 ##	运行结果演示
 
-![student](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/homework/hw04/part1/assets/student.png)
+![result](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Python/homework/hw04/part1/assets/result.png)
 
 <br>
 
