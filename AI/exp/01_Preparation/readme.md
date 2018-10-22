@@ -129,6 +129,17 @@
 
 	docker run -d -it -p 6666:22 --name ussh ubuntu_base_ssh /bin/start.sh
 
+*	传送文件
+
+	[Copying files from host to Docker container](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
+
+	[Docker CLI docs for cp](https://docs.docker.com/engine/reference/commandline/cp/)
+
+	```bash
+	$ docker cp foo.txt mycontainer:/notebooks/foo.txt
+	$ docker cp mycontainer:/notebooks/foo.txt foo.txt
+	```
+
 <br><br><br><br>
 
 **Jupyter quick start**
