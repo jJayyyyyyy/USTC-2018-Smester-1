@@ -23,13 +23,13 @@
 
 ##	1. 运行截图
 
-![result1](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw01/city%20temperature/assets/result1.png)
+![result1](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw01/city%20temperature/assets/result1.png)
 
-![result2](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw01/city%20temperature/assets/result2.png)
+![result2](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw01/city%20temperature/assets/result2.png)
 
-![result3](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw01/city%20temperature/assets/result3.png)
+![result3](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw01/city%20temperature/assets/result3.png)
 
-![result4](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw01/city%20temperature/assets/result4.png)
+![result4](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw01/city%20temperature/assets/result4.png)
 
 <br>
 
@@ -118,7 +118,7 @@
 
 ##	5. 流程图
 
-![workflow](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw01/city%20temperature/assets/workflow.jpg)
+![workflow](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw01/city%20temperature/assets/workflow.jpg)
 
 <br>
 

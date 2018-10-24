@@ -155,7 +155,7 @@
 
 	*	最后, 将数据用图表的形式表现出来, 如图所示(图表使用 `Desmos` 绘制)
 
-		![result](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/Practical%20Algorithm%20Desgin/homework/hw03/assets/result.png)
+		![result](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/homework/hw03/assets/result.png)
 
 		从中我们可以看到, 在 `n<=40` 时, 数据点的分布大致符合 `O(n^2)` 的时间复杂度, 而 `n` 更大时, `sumFacto(n)` 的增长速度超过了 `O(n^2)`, 根据参考资料1, 这可能是由于 n 过大时, `result = n * tmp;` 的时间复杂度从 `O(1)` 变成了 `O(lgn)`, 从而使总的时间复杂度提升到了 `O(n^2 * lgn)`,
 
