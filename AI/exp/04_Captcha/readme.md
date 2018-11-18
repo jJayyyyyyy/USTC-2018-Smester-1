@@ -155,7 +155,7 @@
 
 	*	总体模型图如下
 
-		![model](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/AI/exp/04_Captcha/assets/model.png)
+		![model](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/AI/exp/04_Captcha/assets/model.jpg)
 
 3.	训练模型参数并保存
 
