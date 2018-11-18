@@ -1,0 +1,6 @@
+model_checkpoint_path: "/notebooks/lab03/captchaCnn/0.99captcha.model-7900"
+all_model_checkpoint_paths: "/notebooks/lab03/captchaCnn/0.95captcha.model-4900"
+all_model_checkpoint_paths: "/notebooks/lab03/captchaCnn/0.96captcha.model-5400"
+all_model_checkpoint_paths: "/notebooks/lab03/captchaCnn/0.97captcha.model-5600"
+all_model_checkpoint_paths: "/notebooks/lab03/captchaCnn/0.98captcha.model-7100"
+all_model_checkpoint_paths: "/notebooks/lab03/captchaCnn/0.99captcha.model-7900"
