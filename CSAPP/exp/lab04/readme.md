@@ -383,7 +383,7 @@
 
 *	截图如下
 
-	![result]((https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/CSAPP/exp/lab04/assets/result.png)
+	![result](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/CSAPP/exp/lab04/assets/result.png)
 
 	<br>
 
