@@ -56,11 +56,11 @@
 	```bash
 	# 将 container_id 缩写为 cid
 
-	$ docker run --it image-name bash
+	$ docker run -it image-name bash
 	root@cid1:# touch file1
 	root@cid1:# logout
 
-	$ docker run --it image-name bash
+	$ docker run -it image-name bash
 	root@cid2:# ls
 
 	# 没有 container1 里面的 file1
@@ -104,7 +104,7 @@
 	这个 `TF docker image` 是基于 `Ubuntu 16.04` 建立的
 
 	```bash
-	$ docker exec --it image-name bash
+	$ docker exec -it image-name bash
 	root@cid:# lsb_release -a
 	...
 	Ubuntu 16.04.5 LTS
@@ -161,8 +161,8 @@
 	```bash
 	# jupyter 默认监听 8888 端口
 	# 把外部的 80 映射到 docker 里面的 8888，这样浏览器直接用 127.0.0.1 即可访问
-	$ docker run -it -p 80:8888 tensorflow/tensorflow:latest-py3			# 自动运行 jupyter server
-	# $ docker run -it -p 80:8888 tensorflow/tensorflow:latest-py3 bash	# 不运行 jupyter server
+	$ docker run -it -p 80:8888 tensorflow/tensorflow:latest-py3    # 自动运行 jupyter server
+	# $ docker run -it -p 80:8888 tensorflow/tensorflow:latest-py3 bash    # 不运行 jupyter server
 	
 	# 如果 80 端口已经被占用，则需要找到监听该端口的 cid80, 然后
 	# $ docker stop cid80
@@ -170,18 +170,18 @@
 
 	这样就得到了第一个容器的cid，记下来，或者通过 docker ps -a 查看
 
-	下一次就可以通过 start - exec 进入 container 了，而且这个tf容器会默认运行一个 jupyter server
+	下一次就可以通过 start -> exec 进入 container 了，而且这个tf容器会默认运行一个 jupyter server
 	
 	```
 	$ docker start cid
 	$ docker exec -it cid bash
-	root@cid:notebooks# jupyter notebook list	# 显示正在运行的 jupyter notebook server
+	root@cid:notebooks# jupyter notebook list    # 显示正在运行的 jupyter notebook server
 	```
 
 *	修改端口(略)
 
 	```bash
-	root@cid:notebooks# jupyter notebook --port 9876 --allow-root
+	root@cid:notebooks# jupyter notebook --port 8080 --allow-root
 	```
 
 *	设置密码
