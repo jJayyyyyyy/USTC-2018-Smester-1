@@ -56,9 +56,11 @@ It's my honor and pleasure to share my experience with you.
 
 *	作业命名格式
 
-	文件名不要带加号 `+` 和空格 ` ` ，否则作业提交到教辅系统的时候可能导致上传错误。一般来说连接符用下划线 `_` 就好了。比如我的文件名一般都是 `SA12345678_小明_算法第n次作业.pdf` 或者 `SA12345678_小明_算法第n次实验.zip` 。另外，在作业上传之后，进入 `我的作业管理` 或者 `我的实验管理` , 试着下载刚才上传的作业/实验，如果能够成功下载和打开，就说明上传成功了。
+	文件名不要带加号 `+` 和空格 ` ` ，否则作业提交到教辅系统的时候可能导致上传错误。一般来说连接符用下划线 `_` 就好了。比如我的文件名一般都是 **SA12345678_小明_算法第n次作业.pdf** 或者 **SA12345678_小明_算法第n次实验.zip**。
 
-	最后，有的课程在学期末会有补交作业和实验的机会，但是最好不要给自己和助教添麻烦，每次提交的时候 **double check** 一下总是没错的。
+	另外，在作业上传之后，进入 **我的作业管理** 或者 **我的实验管理**, 试着下载刚才上传的作业/实验，如果能够成功下载和打开，就说明上传成功了。
+
+	最后，有的课程在学期末会有补交作业和实验的机会，但是最好不要给自己和助教添麻烦，每次提交的时候 **double check** 总是没错的。
 
 <br>
 
@@ -72,7 +74,7 @@ It's my honor and pleasure to share my experience with you.
 
 *	区块链和人工智能的时间有冲突，周二的区块链无法参加，希望选了区块链的同学帮忙补充下笔记~非常感谢！
 
-*	下半学期的网络安全实践课程和网络程序设计课程，时间冲突了，希望选了网络安全实践的同学帮忙补充下笔记~非常感谢！
+*	下半学期的网络安全实践和网络程序设计的时间冲突了，希望选了网络安全实践的同学帮忙补充下笔记~非常感谢！
 
 <br>
 
@@ -84,7 +86,23 @@ It's my honor and pleasure to share my experience with you.
 	*	https://zhuanlan.zhihu.com/p/36402362
 	*	https://zhuanlan.zhihu.com/p/44781302
 
-*	pdf阅读器
+*	Text Editor
+
+	*	[Sublime Text](https://www.sublimetext.com/)
+
+		首推 `Sublime Text`
+
+	*	[Notepad++](https://code.visualstudio.com/)
+
+		主要用于高亮代码导出(选中代码---Plugins---NppExport---Copy HTML to Clipboard---粘贴到word---导出为pdf)
+
+		需要安装 `npp export` 插件(以前是集成在npp里面的，不知道什么时候开始做成了一款插件)
+
+	*	[Visual Studio Code](https://code.visualstudio.com/)
+
+		VSC 比 ST 略重，但也是一款非常优秀的软件(MS出品)
+
+*	pdf reader
 
 	[Sumatra PDF, website](https://www.sumatrapdfreader.org/free-pdf-reader.html)
 
@@ -94,11 +112,23 @@ It's my honor and pleasure to share my experience with you.
 
 *	压缩工具
 
-	[7z](https://www.7-zip.org/)
+	[7z, website](https://www.7-zip.org/)
 
 	开源软件，绿色无广告，支持的格式够用了，而且也支持 `Linux` 和 `MacOS` 系统，推荐。
 
-TODO: 分类上传电子书
+*	online swf reader
+
+	[Cloud SWF, Flash Player with Drive](http://flashplayer.fullstacks.net/)
+
+	推荐这个网站的原因主要是因为石竹老师C++课程的课件是 `swf` 格式的（逃
+
+*	在线画图
+
+	[ProcessOn](https://www.processon.com/diagrams), 一直非常良心好用
+
+	<br>
+
+*	TODO: 分类上传电子书
 
 <br>
 
