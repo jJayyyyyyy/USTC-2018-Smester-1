@@ -1,0 +1,13 @@
+--2018-11-30 08:33:39--  http://ssea.ustcsz.edu.cn:443/UploadFiles/experimentResources/20181123/%E5%AE%9E%E9%AA%8C%E4%BA%94%E6%8C%87%E5%AF%BC%E4%B9%A6_201615145328920_2018112392622439.pdf
+Resolving ssea.ustcsz.edu.cn (ssea.ustcsz.edu.cn)... 219.219.220.50
+Connecting to ssea.ustcsz.edu.cn (ssea.ustcsz.edu.cn)|219.219.220.50|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 133842 (131K) [application/pdf]
+Saving to: ‘\345\256%9E\351\252%8C\344\272%94\346%8C%87导书_201615145328920_2018112392622439.pdf.1’
+
+     0K .......... .......... .......... .......... .......... 38% 40.2K 2s
+    50K .......... .......... .......... .......... .......... 76%  160K 0s
+   100K .......... .......... ..........                      100% 11.6M=1.6s
+
+2018-11-30 08:33:41 (83.8 KB/s) - ‘\345\256%9E\351\252%8C\344\272%94\346%8C%87导书_201615145328920_2018112392622439.pdf.1’ saved [133842/133842]
+
