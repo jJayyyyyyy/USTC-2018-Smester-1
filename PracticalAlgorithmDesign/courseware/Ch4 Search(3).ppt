@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>对不起，出错了，页面未找到-----中国科学技术大学软件学院教学辅助系统</title>
+    <link href="/css/404.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="mainContainer">
+        <div class="topLeft">
+        </div>
+        <div class="topRight">
+        </div>
+        <div class="bottomLeft">
+        </div>
+        <div class="bottomRight">
+        </div>
+        <h1>
+            <a href="/" title="返回系统首页"></a></h1>
+        <div id="message">
+            <h2>
+                Error: Page not found</h2>
+            <p>
+                对不起，未找到您要查看的页面。</p>
+            <p>
+                该页面可能移动或者删除，给您带来的不便深表歉意，如需帮助，请联系网站管理员。中国科学技术大学软件学院教学辅助系统</p>
+            <p>
+                <a href="/" title="返回系统首页">« 返回系统首页</a></p>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</body>
+</html>
