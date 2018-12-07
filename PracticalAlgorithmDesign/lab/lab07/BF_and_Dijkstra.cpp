@@ -141,8 +141,7 @@ public:
 
 class Dijkstra{
 public:
-	// bool hasNegativeEdge;
-	int n, m;
+	int n;
 	vector<bool> vis;
 	vector<int> dist, ansPath;
 	vector<vector<int> > graph;
@@ -229,11 +228,11 @@ public:
 		for( int i = 0; i < row; i++ ){
 			for( int j = 0; j < col; j++ ){
 				if( graph[i][j] < 0 ){
-					return false;
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 
 	void test(){
