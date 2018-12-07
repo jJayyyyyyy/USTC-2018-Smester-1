@@ -4,7 +4,7 @@
 
 	设起点 `src = V0`, 求 `src` 到各个结点的最短距离
 
-	![graph](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/lab/lab01/assets/graph.png)
+	![graph](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/PracticalAlgorithmDesign/lab/lab07/assets/graph.png)
 
 *	Bellman-Ford 算法
 
