@@ -64,7 +64,7 @@ It's my honor and pleasure to share my experience with you.
 
 <br>
 
-##  我的课表
+##	我的课表
 
 ![timetable](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/blob/master/assets/timetable.jpg)
 
@@ -78,7 +78,27 @@ It's my honor and pleasure to share my experience with you.
 
 <br>
 
+##	GitHub/博客推荐
+
+*	一般首先在 `weekly` 中更新.
+
+*	[冰水鉴心的博客](https://xq773939719.github.io/)
+
+*	[且听风吟的博客](https://www.windsings.com/)
+
+*	[zhujun的GitHub](https://github.com/z-h-u-j-u-n)
+
+*	[Arfer的GitHub](https://github.com/Arfer-ustc)
+
+*	[windmelon的CSAPP:bufbomb(一)](https://zybuluo.com/windmelon/note/1332160)
+
+*	[ChanShaw的博客](https://chan-shaw.github.io/)
+
+	<br>
+
 ##	电子书、其他资源
+
+*	一般首先在 `weekly` 中更新.
 
 *	周再达同学整理的人脸识别，目标检测和目标追踪的论文以及对应的论文解读
 
@@ -124,7 +144,9 @@ It's my honor and pleasure to share my experience with you.
 
 *	在线画图
 
-	[ProcessOn](https://www.processon.com/diagrams), 一直非常良心好用
+	[ProcessOn](https://www.processon.com/diagrams), 用于画各种框图
+
+	[sketchpad](https://sketch.io/sketchpad/), 在线画板
 
 	<br>
 
@@ -135,7 +157,6 @@ It's my honor and pleasure to share my experience with you.
 ##  Contributors
 
 *	周再达
-
 
 (欢迎分享各种笔记和学习资源)
 
