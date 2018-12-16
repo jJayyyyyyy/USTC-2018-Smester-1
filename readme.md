@@ -94,6 +94,10 @@ It's my honor and pleasure to share my experience with you.
 
 *	[ChanShaw的博客](https://chan-shaw.github.io/)
 
+*	[虎哥的博客](http://cjh.zone/)
+
+*	[柯神的博客](https://www.keyanjie.net/)
+
 	<br>
 
 ##	电子书、其他资源
