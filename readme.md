@@ -98,6 +98,8 @@ It's my honor and pleasure to share my experience with you.
 
 *	[柯神的博客](https://www.keyanjie.net/)
 
+*	[建波的博客](https://hujianboo.github.io/)
+
 	<br>
 
 ##	电子书、其他资源
