@@ -136,7 +136,7 @@
 	skb = ip_make_skb(sk, fl4, getfrag, msg->msg_iov, ulen, sizeof(struct udphdr), &ipc, &rt, msg->msg_flags);
 	```
 
-	从 `ip_make_skb` 的前缀可以看出这是要调用ip层的函数对数据进行重新封装。根据参考文献
+	从 `ip_make_skb` 的前缀可以看出这是要调用ip层的函数对数据进行重新封装。根据[参考文献](https://cxd2014.github.io/2016/08/13/network-udp/)
 
 	> UDP协议与IP层之间没有定义发送接口, 而是在udp_sendmsg函数中调用IP层发送数据包的回调函数ip_append_data,  或在udp_sendpage函数中调用IP层的回调函数ip_append_page, 将UDP数据报放入IP层。
 
@@ -225,7 +225,7 @@
 	```c
 	SyS_socketcall()
 	    /* ... */
-	        inet_send_msg()
+	        inet_sendmsg()
 	            udp_sendmsg()
 	                ip_make_skb()
 	                udp_send_skb()
@@ -243,7 +243,200 @@
 
 ##	UDP 接收数据
 
-*	TODO
+*	类似于数据的发送，我们在 `inet_recvmsg` 处设置断点
+
+	```
+	(gdb) b inet_recvmsg
+	Breakpoint 3 at 0xc1632440: file net/ipv4/af_inet.c, line 757.
+	(gdb) c
+	Continuing
+
+	Breakpoint 3, inet_recvmsg (iocb=0xc7859cb8, sock=0xc763bc00, msg=0xc7859d54, size=1024, flags=0) at net/ipv4/af_inet.c:757
+	```
+
+	我们查看一下 `inet_recvmsg()` 的源码，可以发现它的结构和 `inet_sendmsg()` 类似
+
+	```c
+	/*
+	http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/af_inet.c#755
+	*/
+	int inet_recvmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg, ize_t size, int flags)
+	{
+		struct sock *sk = sock->sk;
+		int addr_len = 0;
+		int err;
+		// rps, request processed per second?
+		// rps, Recovery Point Server?
+		sock_rps_record_flow(sk);
+
+		err = sk->sk_prot->recvmsg(iocb, sk, msg, size, flags & MSG_DONTWAIT, flags & ~MSG_DONTWAIT, &addr_len);
+
+		if (err >= 0)
+			msg->msg_namelen = addr_len;
+		return err;
+	}
+	```
+
+	查看一下 http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/udp.c#2219 定义的 `struct proto udp_prot`, 我们知道 `sk->sk_prot->recvmsg` 指向的是 `udp_recv_msg()`。 我们可以通过 `si` 来验证这一结论。首先 next 直到 af_inet.c:764，然后使用 si，可以发现程序确实进入了 udp.c:1246 的 udp_recvmsg()
+
+	```
+	Breakpoint 2, udp_recvmsg (iocb=0xc7859cb8, sk=0xc008a540, msg=0xc7859d54, len=1024, noblock=0, flags=0, addr_len=0xc7859c94) at net/ipv4/udp.c:1246
+	```
+
+*	下面是 `udp_recvmsg()` 的代码和注释
+
+	```c
+	/*
+	 * 	This should be easy, if there is something there we
+	 * 	return it, otherwise we block.
+	 */
+	int udp_recvmsg(...)
+	{
+		// ... Definition
+
+		if (flags & MSG_ERRQUEUE){
+			// 如果有错误，就返回，
+			return ip_recv_error(sk, msg, len, addr_len);
+		}
+
+		// ...
+	```
+
+	首先我们看到函数上方有一段注释。也就是说，这段UDP的接收(和应答处理)程序应该做的比较简单，有东西就返回，没东西就阻塞。
+
+	接着，我们还是寻找 `skb`, 发现它出现在了 1260 行, 如果我们用 n 单步执行，发现当它执行完 1260 行后，MenuOS 就显示 server 已经收到并打印了 client 发过来的信息，然后跳到了下一次 `inet_recvmsg()`. 这也和最上面的注释相对应，说明 udp 在处理数据接收的时候要做的比较简单。
+
+	```
+	try_again:
+		skb = __skb_recv_datagram(sk, flags | (noblock ? MSG_DONTWAIT : 0), &peeked, &off, &err);
+
+		//...
+
+	csum_copy_err:
+		slow = lock_sock_fast(sk);
+		if (!skb_kill_datagram(sk, skb, flags)) {
+			UDP_INC_STATS_USER(sock_net(sk), UDP_MIB_CSUMERRORS, is_udplite);
+			UDP_INC_STATS_USER(sock_net(sk), UDP_MIB_INERRORS, is_udplite);
+		}
+		unlock_sock_fast(sk, slow);
+
+		if (noblock)
+			return -EAGAIN;
+
+		/* starting over for a new packet */
+		msg->msg_flags &= ~MSG_TRUNC;
+		goto try_again;
+	}
+	```
+
+	所以，如果不研究 `__skb_recv_datagram()` 的细节, 那么接收数据的过程就是
+
+	```c
+	SyS_socketcall()
+	    /* ... */
+	        inet_recvmsg()
+	            udp_recvmsg()
+	                __skb_recv_datagram()
+	                return
+	```
+
+	接下来我们进入 `__skb_recv_datagram()` 内部. 首先还是看看源码长什么样
+
+	```
+	/**
+	*	__skb_recv_datagram - Receive a datagram skbuff
+	*	@sk: socket
+	*	@flags: MSG_ flags
+	*	@peeked: returns non-zero if this packet has been seen before
+	*	@off: an offset in bytes to peek skb from. Returns an offset
+	*	      within an skb where data actually starts
+	*	@err: error code returned
+	*
+	*	Get a datagram skbuff, understands the peeking, nonblocking wakeups
+	*	and possible races. This replaces identical code in packet, raw and
+	*	udp, as well as the IPX AX.25 and Appletalk. It also finally fixes
+	*	the long standing peek and read race for datagram sockets. If you
+	*	alter this routine remember it must be re-entrant.
+	*
+	*	This function will lock the socket if a skb is returned, so the caller
+	*	needs to unlock the socket in that case (usually by calling
+	*	skb_free_datagram)
+	*
+	*	* It does not lock socket since today. This function is
+	*	* free of race conditions. This measure should/can improve
+	*	* significantly datagram socket latencies at high loads,
+	*	* when data copying to user space takes lots of time.
+	*	* (BTW I've just killed the last cli() in IP/IPv6/core/netlink/packet
+	*	*  8) Great win.)
+	*	*			                    --ANK (980729)
+	*
+	*	The order of the tests when we find no data waiting are specified
+	*	quite explicitly by POSIX 1003.1g, don't change them without having
+	*	the standard around please.
+	*/
+	struct sk_buff *__skb_recv_datagram(struct sock *sk, unsigned int flags, int *peeked, int *off, int *err)
+	{
+		struct sk_buff *skb, *last;
+		long timeo;
+		/*
+		 * Caller is allowed not to check sk->sk_err before skb_recv_datagram()
+		 */
+		int error = sock_error(sk);
+
+		if (error)
+			goto no_packet;
+
+		timeo = sock_rcvtimeo(sk, flags & MSG_DONTWAIT);
+
+		do {
+			/* Again only user level code calls this function, so nothing
+			 * interrupt level will suddenly eat the receive_queue.
+			 *
+			 * Look at current nfs client by the way...
+			 * However, this function was correct in any case. 8)
+			 */
+			unsigned long cpu_flags;
+			struct sk_buff_head *queue = &sk->sk_receive_queue;
+			int _off = *off;
+
+			last = (struct sk_buff *)queue;
+			spin_lock_irqsave(&queue->lock, cpu_flags);
+			skb_queue_walk(queue, skb) {
+				last = skb;
+				*peeked = skb->peeked;
+				if (flags & MSG_PEEK) {
+					if (_off >= skb->len && (skb->len || _off || skb->peeked)) {
+						_off -= skb->len;
+						continue;
+					}
+					skb->peeked = 1;
+					atomic_inc(&skb->users);
+				} else
+					__skb_unlink(skb, queue);
+
+				spin_unlock_irqrestore(&queue->lock, cpu_flags);
+				*off = _off;
+				return skb;
+			}
+			spin_unlock_irqrestore(&queue->lock, cpu_flags);
+
+			if (sk_can_busy_loop(sk) && sk_busy_loop(sk, flags & MSG_DONTWAIT))
+				continue;
+
+			/* User doesn't want to wait */
+			error = -EAGAIN;
+			if (!timeo)
+				goto no_packet;
+
+		} while (!wait_for_more_packets(sk, err, &timeo, last));
+
+	return NULL;
+
+	no_packet:
+		*err = error;
+		return NULL;
+	}
+	```
 
 	<br>
 
