@@ -77,6 +77,10 @@
 	http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/af_inet.c#721
 	*/
 
+	/*
+	 * 描述符 kiocb 用来跟踪 I/O 操作的完成状态
+	 * msghdr
+	 */
 	int inet_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg, size_t size)
 	{
 		struct sock *sk = sock->sk;
@@ -237,6 +241,9 @@
 	                    return
 	```
 
+	sock->ops-inet->sendmsg
+	operation
+
 	下面我们来观察一下数据接收的过程
 
 	<br>
@@ -342,7 +349,7 @@
 
 	接下来我们进入 `__skb_recv_datagram()` 内部. 首先还是看看源码长什么样
 
-	```
+	```c
 	/**
 	*	__skb_recv_datagram - Receive a datagram skbuff
 	*	@sk: socket
@@ -438,6 +445,22 @@
 	}
 	```
 
+	对于本段代码的解析可以参考 [胡建波, udp协议栈源码追踪浅析](https://hujianboo.github.io/2018/12/20/udp%E5%8D%8F%E8%AE%AE%E6%A0%88%E6%BA%90%E7%A0%81%E8%BF%BD%E8%B8%AA%E6%B5%85%E6%9E%90/)
+
+	TODO
+
+	<br>
+
+##	TODO
+
+*	callin, caller
+
+	函数指针在哪里初始化
+
+*	callback 回调
+
+*	skb
+
 	<br>
 
 ##	参考
@@ -458,16 +481,24 @@
 
 *	bt, backtrace, 可以查看函数调用栈
 
-*	[Linux网络 - 数据包的发送过程](https://blog.csdn.net/lishanmin11/article/details/77162108)
+*	[胡建波, udp协议栈源码追踪浅析](https://hujianboo.github.io/2018/12/20/udp%E5%8D%8F%E8%AE%AE%E6%A0%88%E6%BA%90%E7%A0%81%E8%BF%BD%E8%B8%AA%E6%B5%85%E6%9E%90/)
 
-*	[udp协议栈源码追踪浅析](https://hujianboo.github.io/2018/12/20/udp%E5%8D%8F%E8%AE%AE%E6%A0%88%E6%BA%90%E7%A0%81%E8%BF%BD%E8%B8%AA%E6%B5%85%E6%9E%90/)
+*	[Linux网络 - 数据包的发送过程](https://blog.csdn.net/lishanmin11/article/details/77162108)
 
 *	[Linux协议栈--UDP协议的发送和接收](https://cxd2014.github.io/2016/08/13/network-udp/)
 
 *	[np2018](https://github.com/mengning/linuxnet/blob/master/np2018.md)
 
-*	[af_inet.c](http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/af_inet.c)
+*	[af_inet.c, bootlin](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/af_inet.c)
 
-*	[udp.c](http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/udp.c)
+*	[udp.c, bootlin](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/udp.c)
 
 *	[TCP和UDP以及IP报文格式](https://blog.csdn.net/kernel_jim_wu/article/details/7447377)
+
+*	[Linux TCP/IP 协议栈源码分析](https://www.cnblogs.com/my_life/articles/4691254.html)
+
+*	[linux内核中socket的创建过程源码分析（总结性质）](https://www.jianshu.com/p/5d82a685b5b6)
+
+*	[【Linux4.1.12源码分析】UDP层csum计算](https://blog.csdn.net/one_clouder/article/details/53177992)
+
+*	[sk_buff结构详解](https://blog.csdn.net/sun172270102/article/details/52292850)
