@@ -1,146 +1,183 @@
-from collections import Counter
+'''
+1. 预处理   
+   1.1 [done] 标准化
+   1.2 [done] 按比例，随机分割训练集、测试集
+
+2. knn
+   2.1 输入一个测试样本 x
+   2.2 计算 x 与所有 train_x 的距离, 排序
+   2.3 取前 k 个 train_x, 即最近的 k 个, 统计 label(即 train_y)
+   2.4 取数量最大的 label 作为 x 的 label
+'''
+
 import numpy as np
-from sklearn import datasets
-from sklearn.datasets import make_classification
-import matplotlib.pyplot as plt
-%matplotlib inline
 
-def shuffle_data(X, y, seed=None):
-	if seed:
-		np.random.seed(seed)
+class Dataset(object):
+	def __init__(self, train_x, train_y, test_x, test_y):
+		self.train_x = train_x
+		self.train_y = train_y
+		self.test_x = test_x
+		self.test_y = test_y
+		self.pred_y = None
 
-	idx = np.arange(X.shape[0])
-	np.random.shuffle(idx)
-	return X[idx], y[idx]
+	def print_info(self):
+		print(self.train_x)
+		print(self.train_y)
+		print(self.test_x)
+		print(self.test_y)
+		print(self.pred_y)
 
-# 正规化数据集 X
-def normalize(X, axis=-1, p=2):
-	lp_norm = np.atleast_1d(np.linalg.norm(X, p, axis))
-	lp_norm[lp_norm == 0] = 1
-	return X / np.expand_dims(lp_norm, axis)
+class FeatureEngineer(object):
+	def __init__(self, iris):
+		self.x = iris.data[:]
+		self.y = iris.target[:]
+		# print(self.x)
+		# print(self.y)
 
-# 标准化数据集 X
-def standardize(X):
-	X_std = np.zeros(X.shape)
-	mean = X.mean(axis=0)
-	std = X.std(axis=0)
-	# 分母不能等于 0 的情形
-	# X_std = (X - X.mean(axis=0)) / X.std(axis=0)
-	for col in range(np.shape(X)[1]):
-		if std[col]:
-			X_std[:, col] = (X_std[:, col] - mean[col]) / std[col]
-	return X_std
+	def standardize(self, mean=0, std=1):
+		'''
+		标准化数据集 X
+		return: @self.std_x
+		'''
+		# std_x = np.zeros(self.x.shape)
+		mean = self.x.mean(axis = 0)
+		std = self.x.std(axis = 0)
+		
+		std_x = []
+		for x in self.x:
+			record = []
+			size = len(x)
+			for i in range(size):
+				feature = x[i]
+				feature = (feature - mean[i]) / std[i]
+				record.append(feature)
+			std_x.append(record)
+		self.std_x = np.array(std_x)
+		# print(self.std_x)
+		return self.std_x
 
-# 划分数据集为训练集和测试集
-def train_test_split(X, y, test_size=0.2, shuffle=True, seed=None):
-	if shuffle:
-		X, y = shuffle_data(X, y, seed)
-		n_train_samples = int(X.shape[0] * (1-test_size))
-		x_train, x_test = X[:n_train_samples], X[n_train_samples:]
-		y_train, y_test = y[:n_train_samples], y[n_train_samples:]
-	return x_train, x_test, y_train, y_test
+	def standarize_with_sklearn(self):
+		from sklearn.preprocessing import StandardScaler
+		ss = StandardScaler()
+		std_x = ss.fit_transform(self.x)
+		self.std_x = std_x
+		# print(std_xx)
+		return self.std_x
 
-def accuracy(y, y_pred):
-	y = y.reshape(y.shape[0], -1)
-	y_pred = y_pred.reshape(y_pred.shape[0], -1)
-	return np.sum(y == y_pred)/len(y)
+	def get_index_list(self, shuffle=True,seed=None):
+		index_list = np.arange(self.x.shape[0])
+		if shuffle:
+			if seed:
+				np.random.seed(seed)
+			np.random.shuffle(index_list)
+		# print(index_list)
+		return index_list
 
-class KNN():
-	""" K 近邻分类算法.
-	Parameters:
-	-----------
-	k: int
-	最近邻个数.
-	"""
-	def __init__(self, k=5):
+	def get_train_and_test_data(self, train_ratio=0.8, shuffle=True, seed=1):
+		x = self.x
+		y = self.y
+
+		size = self.x.shape[0]
+		train_size = int(size * train_ratio)
+		test_size = size - train_size
+
+		index_list = self.get_index_list(shuffle=shuffle, seed=seed)
+		train_index = index_list[:train_size]
+		test_index = index_list[train_size:]
+		dataset = Dataset(x[train_index], y[train_index], x[test_index], y[test_index])
+		return dataset
+
+class Neighbor(object):
+	def __init__(self, index, distance):
+		self.index = index
+		self.distance = distance
+
+	def print_info(self):
+		print(self.index, self.distance)
+
+class KNN(object):
+	def __init__(self, dataset, k=5):
+		self.dataset = dataset
 		self.k = k
 
 	# 计算一个样本与训练集中所有样本的欧氏距离的平方
-	def euclidean_distance(self, one_sample, X_train):
-		one_sample = one_sample.reshape(1, -1)
-		X_train = X_train.reshape(X_train.shape[0], -1)
-		distances = np.power(np.tile(one_sample, (X_train.shape[0], 1)) - X_train, 2).sum(axis=1)
-		return distances
+	def get_euclidean_distance(self, one_x):
+		x = self.dataset.train_x
+
+		# 每一行记录单独进行 sum
+		distance = np.power(one_x - x, 2).sum(axis=1)
+		return distance
+
+	def get_sorted_neighbor_list(self, one_x):
+		distance = self.get_euclidean_distance(one_x)
+		neighbor_list = []
+		for i in range(distance.shape[0]):
+			neighbor = Neighbor(i, distance[i])
+			neighbor_list.append(neighbor)
+
+		sorted_neighbor_list = sorted(neighbor_list, key=lambda neighbor : neighbor.distance)
+		return sorted_neighbor_list
 
 	# 获取 k 个近邻的类别标签
-	def get_k_neighbor_labels(self, distances, y_train, k):
-		k_neighbor_labels = []
+	def get_k_label_list(self, k_neighbor_list):
+		k_label_list = []
+		for neighbor in k_neighbor_list:
+			index = neighbor.index
+			label = self.dataset.train_y[index]
+			k_label_list.append(label)
 
-		# 可能出现距离相同的情况, 此时原来的 [distances==distance] 会把相同距离的点合并成一个数组作为新元素
-		# 这样在后面的 Counter 处会出错
-		# 我们对源代码稍作修改，只取最近的 k 个点
-		dist = np.sort(distances)[:k]
-		cnt = 0
-		for distance in dist:
-			label = y_train[distances==distance]
-			for l in label:
-				k_neighbor_labels.append(l)
-				cnt += 1
-				if cnt == k:
-					break
-			if cnt == k:
-				break
-
-		ans = np.array(k_neighbor_labels)
-		ans = ans.reshape(-1, )
-		return ans
+		return k_label_list
 
 	# 进行标签统计，得票最多的标签就是该测试样本的预测标签
-	def vote(self, one_sample, X_train, y_train, k):
-		distances = self.euclidean_distance(one_sample, X_train)
+	def get_majority_vote(self, one_x):
+		sorted_neighbor_list = self.get_sorted_neighbor_list(one_x)
+		k_neighbor_list = sorted_neighbor_list[:self.k]
+		k_label_list = self.get_k_label_list(k_neighbor_list)
+		d = {}
+		for label in k_label_list:
+			if label in d:
+				d[label] += 1
+			else:
+				d[label] = 0
 
-		y_train = y_train.reshape(y_train.shape[0], 1)
+		maxcnt = 0
+		maxlabel = k_label_list[0]
+		for key, value in d.items():
+			if maxcnt < value:
+				maxcnt = value
+				maxlabel = key
 
-		k_neighbor_labels = self.get_k_neighbor_labels(distances, y_train, k)
+		majority_vote = maxlabel
+		return majority_vote
 
-		find_label, find_count = 0, 0
+	def get_prediction(self):
+		train_x = self.dataset.train_x
+		train_y = self.dataset.train_y
+		test_x = self.dataset.test_x
+		pred_y = []
+		for one_x in test_x:
+			label = self.get_majority_vote(one_x)
+			pred_y.append(label)
 
-		for label, count in Counter(k_neighbor_labels).items():
-			if count > find_count:
-				find_count = count
-				find_label = label
-		return find_label
+		self.dataset.pred_y = np.array(pred_y)
 
-
-	# 对测试集进行预测
-	def predict(self, X_test, X_train, y_train):
-		y_pred = []
-		for sample in X_test:
-			label = self.vote(sample, X_train, y_train, self.k)
-			y_pred.append(label)
-
-		#print(y_pred)
-		return np.array(y_pred)
-
-
-def test_make_classification():
-	# Generate a random n-class classification problem.
-	# n_classes=2, 2分类
-	data = make_classification(n_samples=200, n_features=4, n_informative=2, n_redundant=2, n_repeated=0, n_classes=2)
-	X, y = data[0], data[1]
-	# print(type(X))
-	# 训练集 2/3, 测试集 1/3, 随机打乱
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, shuffle=True)
-	
-	clf = KNN(k=5)
-	y_pred = clf.predict(X_test, X_train, y_train)
-	accu = accuracy(y_test, y_pred)
-	print("Accuracy:", accu)
-
+	def get_accuracy(self):
+		test_y = self.dataset.test_y
+		pred_y = self.dataset.pred_y
+		accu = np.sum(test_y == pred_y) / test_y.shape[0]
+		print('模型准确率: ', accu)
 
 def test_iris():
+	from sklearn import datasets
 	iris = datasets.load_iris()
+	fe = FeatureEngineer(iris)
+	fe.standardize(mean=0, std=1)
+	dataset = fe.get_train_and_test_data(train_ratio=0.75, seed=None)
 
-	X, y = iris.data[:], iris.target[:]
-	
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, shuffle=True)
-	
-	clf = KNN(k=5)
-	y_pred = clf.predict(X_test, X_train, y_train)
-	accu = accuracy(y_test, y_pred)
-	print('Accuracy: ', accu)
+	knn = KNN(dataset, k=3)
+	knn.get_prediction()
+	knn.get_accuracy()
 
-if __name__ == "__main__":
-	test_make_classification()
-	print('\n\n\n\n')
+
+if __name__ == '__main__':
 	test_iris()
