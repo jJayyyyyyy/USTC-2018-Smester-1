@@ -82,6 +82,8 @@ It's my honor and pleasure to share my experience with you.
 
 *	一般首先在 `weekly` 中更新.
 
+*	[郭老师的区块链与信息安全实践](https://www.zhihu.com/people/ustcsse308)
+
 *	[冰水鉴心的博客](https://xq773939719.github.io/)
 
 *	[且听风吟的博客](https://www.windsings.com/)
@@ -99,6 +101,8 @@ It's my honor and pleasure to share my experience with you.
 *	[柯神的博客](https://www.keyanjie.net/)
 
 *	[建波的博客](https://hujianboo.github.io/)
+
+*	[冲凉的博客](https://blog.csdn.net/z714405489)
 
 	<br>
 
