@@ -56,7 +56,7 @@ class FeatureEngineer(object):
 		# print(self.std_x)
 		return self.std_x
 
-	def standarize_with_sklearn(self):
+	def standardize_with_sklearn(self):
 		from sklearn.preprocessing import StandardScaler
 		ss = StandardScaler()
 		std_x = ss.fit_transform(self.x)
