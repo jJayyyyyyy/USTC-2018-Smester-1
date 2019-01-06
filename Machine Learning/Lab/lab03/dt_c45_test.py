@@ -294,7 +294,7 @@ def get_tree(train_set):
 	dt = DecisionTree()
 	feature_name = ds.feature_name
 	tree = dt.create_tree_cont(train_set, feature_name)
-	print('id3 decision tree:\n', tree, '\n\n')
+	print('c45 decision tree:\n', tree, '\n\n')
 	# https://jsonformatter.curiousconcept.com/
 	return tree
 
