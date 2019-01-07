@@ -84,11 +84,13 @@ It's my honor and pleasure to share my experience with you.
 
 *	[郭老师的区块链与信息安全实践](https://www.zhihu.com/people/ustcsse308)
 
-*	[冰水鉴心的博客](https://xq773939719.github.io/)
+*	[强哥的博客](https://xq773939719.github.io/)
 
-*	[且听风吟的博客](https://www.windsings.com/)
+*	[博强的博客](https://www.windsings.com/)
 
-*	[zhujun的GitHub](https://github.com/z-h-u-j-u-n)
+*	[朱哥的GitHub](https://github.com/z-h-u-j-u-n)
+
+	[朱哥的博客](https://blog.csdn.net/Ahead_J)
 
 *	[Arfer的GitHub](https://github.com/Arfer-ustc)
 
@@ -157,6 +159,10 @@ It's my honor and pleasure to share my experience with you.
 	[ProcessOn](https://www.processon.com/diagrams), 用于画各种框图
 
 	[sketchpad](https://sketch.io/sketchpad/), 在线画板
+
+	[online plot, Desmos](https://www.desmos.com/calculator)
+
+	[online plot, plot.ly](https://plot.ly/create/#/)
 
 	<br>
 
