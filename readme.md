@@ -164,6 +164,12 @@ It's my honor and pleasure to share my experience with you.
 
 	[online plot, plot.ly](https://plot.ly/create/#/)
 
+*	[Visualizations of Data Structure and Algorithm](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
+
+	来自 Department of Computer Science of USFCA, 展示了常见数据结构和算法的可视化过程
+
+	比如 [Red/Black Tree](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html), [Splay Tree](https://www.cs.usfca.edu/~galles/visualization/SplayTree.html) 的结点的插入删除等等
+
 	<br>
 
 *	TODO: 分类上传电子书
