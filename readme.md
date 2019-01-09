@@ -164,6 +164,8 @@ It's my honor and pleasure to share my experience with you.
 
 	[online plot, plot.ly](https://plot.ly/create/#/)
 
+	[online gif editor](https://ezgif.com/)
+
 *	[Visualizations of Data Structure and Algorithm](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
 
 	来自 Department of Computer Science of USFCA, 展示了常见数据结构和算法的可视化过程
