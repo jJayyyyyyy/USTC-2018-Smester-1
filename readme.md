@@ -142,6 +142,10 @@ It's my honor and pleasure to share my experience with you.
 
 	开源软件，比国内的免费pdf阅读器要好用很多，而且绿色无广告，推荐。
 
+*	audio/video player
+
+	[VLC](http://www.videolan.org/vlc/), 多媒体播放器, 无广告, 开源, 跨平台
+
 *	压缩工具
 
 	[7z, website](https://www.7-zip.org/)
