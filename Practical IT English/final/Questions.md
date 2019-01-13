@@ -6,25 +6,25 @@
 
 *	Why do you want to work for us
 
-	I have always wanted to work for this company. Your company is an industry leader. This is the place where my experience and skills can be put to use and make things happen. I believe I can learn a lot here and make my contribution to the company.
+	I have always wanted to work for your company. Your company is an industry leader. This is the place where my experience and skills can be put into use and make things happen. I believe I can learn a lot here and make my contributions to the company.
 
 *	strength
 
 	Smart and hard work
 
-	experienced in software development
+	I'm experienced in software development
 
-	good communication skills, team player
+	I have good communication skills, I'm a team player
 
 	Confident and enthusiastic
 
 *	weakness
 
-	I have not much experience in other programming language, but I think that won't be a problem cuz the principles is basically the same, and there are a lot of resources and I'm a quick learner. I have confidence to make it.
+	I have not much experience in other programming language, but I think that won't be a problem cuz the principles are basically the same. I'm a quick learner and there are a lot of resources of that. I have confidence to make it.
 
 *	Five year plan
 
-	I should be a senior developer then. So I will continue to learn and keep pace with the new technology. Work together with my teammate and make out a project that can benefit our company.
+	I should be a senior developer then. So I will continue to learn and keep pace with the new technology. I'll work together with my teammates and make out some projects that can benefit our company.
 
 *	progress to date
 
@@ -32,7 +32,19 @@
 
 *	under pressure?
 
-	I work well under pressure because that can help me with my work. And I always prioritize things in the schedule. So pressure won't be a problem
+	I work well under pressure because it helps me with my work. And I always prioritize things in the schedule. So pressure won't be a problem
+
+*	What about salary
+
+	It depends on how much I can do for your company. I'd like to know more about the responsibilities.
+
+*	deadline?
+
+	plan, checklist, priority
+
+*	If we hire you, what can you do for our company and how long will you stay for us?
+
+*	how 
 
 	<br>
 
@@ -42,7 +54,7 @@
 
 	*	Concentration. focus on one thing, single-tasking
 
-	*	Reduction. Reduce the things that waste your time, like too much socializing, personal calls and emails, excessive meetings.
+	*	Reduction. Reduce the things that waste your time, like too much socializing, phone calls and emails and meetings.
 
 		First things first. Important things first.
 
@@ -50,7 +62,7 @@
 
 *	Practical Time Saver, Techniques,  
 
-	*	Do things in Quadrant II in advance, important but not urgent
+	*	Do things in Quadrant II in advance (important but not urgent)
 
 	*	Write things down, make checklist
 
@@ -64,7 +76,7 @@
 
 	*	Take short breaks
 
-	*	Turn off applications like email box and social media app
+	*	Turn off email box and social media applications
 
 *	Common Mistake
 
@@ -92,11 +104,11 @@
 
 	*	Objective
 
-	*	Summary(highlight the important things)
+	*	Summary (highlight the important things)
 
 	*	Education
 
-	*	Working Experience
+	*	Working experience
 
 *	Professional Skills
 
@@ -104,9 +116,11 @@
 
 	OS, database
 
-	experienced
+	experience in the field
 
-*	Creative Skills
+*	Soft skills
+
+	Communication, listening, confidence, project management, time management, team player, gratitude, leadership, presentation
 
 *	Verbs
 
@@ -120,10 +134,16 @@
 
 	<br>
 
-##	Unit3
+##	Presentation
+
+*	Slides, Delivery, Jobs' techniques
+
+*	Key Points for presentation
+
+	Prepare well, tell a story, gestures, confident, adjust to audience's response
 
 	<br>
 
-##	Unit4
+##	Negotiation
 
 	<br>
