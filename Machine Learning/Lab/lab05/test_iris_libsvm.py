@@ -1,4 +1,4 @@
-# wget https://www.cnblogs.com/Finley/p/5329417.html
+# wget https://codeload.github.com/cjlin1/libsvm/zip/v323
 # 7z x v323.zip
 
 # https://blog.csdn.net/xmu_jupiter/article/details/46830327
