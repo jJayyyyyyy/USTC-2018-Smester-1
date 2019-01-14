@@ -44,7 +44,7 @@
 
 *	If we hire you, what can you do for our company and how long will you stay for us?
 
-*	how 
+	
 
 	<br>
 
@@ -142,8 +142,32 @@
 
 	Prepare well, tell a story, gestures, confident, adjust to audience's response
 
+	repeat important things, highlight the important points
+
+	watch your time, get comfortable with it
+
+	dont just read the notes
+
 	<br>
 
 ##	Negotiation
+
+*	five steps
+
+	opening statements, asking for basic information, making concessions, discussing dilivery, communication
+
+	Prepare, debate, propose, bargain, agree
+
+*	How to
+
+	show understanding, common interest, agreement on a point, open-ended question, close-ended questions, conditional Qs, explore for possibilities, benefits to the other party
+
+*	Donts
+
+	Anger, Pride, Greediness
+
+*	Dos
+
+	Organize your thoughts, think through it, be concise, listen carefully, translate your message into benefits for the other party
 
 	<br>
