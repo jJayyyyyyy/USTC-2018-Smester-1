@@ -1,0 +1,23 @@
+#!/bin/bash
+dd if=/dev/zero of=rootfs.img bs=4096 count=1024
+mkfs.ext3 rootfs.img
+
+mkdir root
+sudo mount -o loop rootfs.img root
+
+# /etc/resolv.conf是默认设置DNS的文件
+sudo cp etc root/ -rf
+
+gcc -o init linktable.c menu.c main.c -m32 -static -lpthread
+# 编译好的init
+sudo cp init root/
+sudo mkdir root/dev
+
+# linux启动过程中会启用console设备
+sudo mknod root/dev/console c 5 1
+
+# 需要提供一个linux根设备，我们使用ram
+sudo mknod root/dev/ram b 1 0
+
+sudo umount root
+# 这时rootfs.img制作完毕，上传到实验楼执行如下命令，这个init程序中执行域名解析时能从所在文件系统中找到/etc/resolv.conf配置得到DNS的IP地址
