@@ -1,0 +1,203 @@
+# https://www.cnblogs.com/syw-casualet/p/5271369.html
+
+apt-get install make gcc libc6-dev
+
+mkdir ~/LinuxKernel
+cd ~/LinuxKernel/
+wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.6.tar.xz
+xz -d linux-3.18.6.tar.xz
+tar -xvf linux-3.18.6.tar
+cd linux-3.18.6
+
+apt-get update
+# apt-get install build-essential flex libelf-dev libc6-dev-amd64 binutils-dev libdwarf-dev
+apt install libc6-dev build-essential
+
+make i386_defconfig
+# bc: not found
+apt-get install bc
+
+make
+
+cd ~/LinuxKernel/
+mkdir rootfs
+
+git clone https://github.com/mengning/menu.git
+cd menu
+
+
+######
+gcc -o init linktable.c menu.c test.c -static –pthread
+gcc: error: –lpthread: No such file or directory
+
+######
+gcc -o init -pthread linktable.c menu.c test.c -static
+# 或 gcc -Wall -pthread -o init linktable.c menu.c test.c -static
+######
+
+cd ../rootfs
+cp ../menu/init ./
+
+find . | cpio -o -H newc |gzip -9 > ../rootfs.img
+
+cd ..
+
+
+
+apt-get install qemu
+
+# https://stackoverflow.com/questions/22967925/running-qemu-remotely-via-ssh
+
+qemu-system-i386 -curses -kernel linux-3.18.6/arch/x86/boot/bzImage -initrd rootfs.img
+
+# ESC + 2 then q + ENTER 退出
+
+
+cd ~/LinuxKernel/linux-3.18.6
+make menuconfig
+# fatal error: curses.h: No such file or directory
+
+apt-get install libncurses5-dev libncursesw5-dev
+make menuconfig
+
+# 选择 kernel hacking --- compile-time checks and compile options --- compile the kernel with debug info
+# 然后 save --- ok, 一路退出
+# 重新 make
+
+make
+
+qemu-system-i386 -curses -kernel linux-3.18.6/arch/x86/boot/bzImage -initrd rootfs.img -s -S
+
+
+
+apt-get install gdb
+gdb
+
+https://www.cs.swarthmore.edu/~newhall/unixhelp/qemu_guide.html
+pkill qemu
+
+
+
+剩下的内容请看这里
+https://github.com/jJayyyyyyy/USTC-2018-Smester-1/tree/master/LinuxNetworkProgramming/lab3
+
+注意修改 lab3/Makefile
+
+把
+qemu -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -s -S
+改为
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -netdev tap,id=mytap,ifname=tap1,script=/root/etc/qemu-ifup,downscript=/root/etc/qemu-ifdown -device e1000,netdev=mytap -s -S
+
+
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -netdev tap,id=mytap,ifname=tap1,script=/root/etc/qemu-ifup,downscript=/root/etc/qemu-ifdown -device e1000,netdev=mytap -s -S
+
+
+
+apt-get install bridge-utils dnsmasq-base
+ps aux | grep dns
+
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd rootfs.img -netdev tap,id=mytap,script=/root/etc/qemu-ifup-nat,downscript=/root/etc/qemu-ifdown-nat -device e1000,netdev=mytap
+
+-netdev tap,id=mytap,ifname=tap1,script=/root/etc/qemu-ifup,downscript=/root/etc/qemu-ifdown -device e1000,netdev=mytap
+
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -s -S
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -netdev tap,id=mytap,script=/root/etc/qemu-ifup-nat,downscript=/root/etc/qemu-ifdown-nat -device e1000,netdev=mytap
+
+
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/client.c
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/linktable.c
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/linktable.h
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/menu.c
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/menu.h
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/setroute.c
+wget https://raw.githubusercontent.com/mengning/linuxnet/master/lab5/syswrapper.h
+
+
+
+[res_init](https://www.bbsmax.com/A/QV5ZwQ3wdy/)
+
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -netdev user,id=eth0,dns=10.0.2.3
+
+
+#!/bin/bash
+rm init
+rm rootfs
+rm -rf root
+
+make init
+dd if=/dev/zero of=rootfs.img bs=4096 count=1024
+mkfs.ext3 rootfs.img
+
+mke2fs rootfs.img
+mkdir root
+sudo mount -o loop rootfs.img root
+cp etc root/ -rf # /etc/resolv.conf是默认设置DNS的文件
+cp init root/    # 编译好的init
+sudo umount root
+qemu-system-i386 -curses -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img
+
+
+
+
+
+getResolvConf();
+
+https://stackoverflow.com/questions/23106012/how-to-access-raspberry-pi-qemu-vm-via-network
+https://unix.stackexchange.com/questions/124681/how-to-ssh-from-host-to-guest-using-qemu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cd linuxnet
+
+
+rm -rf root init rootfs.img
+gcc -o init linktable.c menu.c main.c -m32 -static -lpthread
+
+
+dd if=/dev/zero of=rootfs.img bs=4096 count=1024
+mkfs.ext3 rootfs.img
+mkdir root
+
+sudo mount -o loop rootfs.img root
+sudo cp etc root/ -rf # /etc/resolv.conf是默认设置DNS的文件
+
+sudo cp init root/    # 编译好的init
+sudo mkdir root/dev
+sudo mknod root/dev/console c 5 1 # linux启动过程中会启用console设备
+sudo mknod root/dev/ram b 1 0 # 需要提供一个linux根设备，我们使用ram
+sudo umount root
+# 这时rootfs.img制作完毕，上传到实验楼执行如下命令，这个init程序中执行域名解析时能从所在文件系统中找到/etc/resolv.conf配置得到DNS的IP地址
+
+#!/bin/bash
+gcc -o init linktable.c menu.c main.c -m32 -static -lpthread
+sudo mount -o loop rootfs.img root
+sudo cp init root/    # 编译好的init
+sudo umount root
+qemu-system-i386 -curses -kernel ../bzImage -initrd rootfs.img -append "root=/dev/ram init=/init"
+
+
+
+
+make rootfs

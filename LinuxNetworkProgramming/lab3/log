@@ -1,0 +1,329 @@
+Serving HTTP on 0.0.0.0 port 8080 ...
+10.240.0.64 - - [20/Dec/2018 06:31:15] "GET / HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:32:01] "GET /blog.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:32:55] code 404, message File not found
+10.240.0.213 - - [20/Dec/2018 06:32:55] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.64 - - [20/Dec/2018 06:32:56] code 404, message File not found
+10.240.0.64 - - [20/Dec/2018 06:32:56] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:33:03] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:33:07] "GET /readme.md HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:33:07] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:33:18] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:33:18] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:33:23] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:33:23] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:33:24] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:33:25] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:33:27] "GET /blog.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:33:31] "GET / HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:33:34] "GET /readme.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:33:36] "GET / HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:33:37] "GET / HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:33:39] code 404, message File not found
+10.240.0.64 - - [20/Dec/2018 06:33:39] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.191 - - [20/Dec/2018 06:33:43] code 404, message File not found
+10.240.1.191 - - [20/Dec/2018 06:33:43] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.213 - - [20/Dec/2018 06:33:44] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:33:44] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:33:45] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:33:45] "GET / HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:33:48] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:33:53] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:33:53] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:33:53] "GET / HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:33:57] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:33:57] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:33:57] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:34:04] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:34:04] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:34:05] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:34:06] code 404, message File not found
+10.240.1.191 - - [20/Dec/2018 06:34:06] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:34:07] "GET / HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:34:09] "GET / HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:34:16] "GET / HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:34:18] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:34:25] code 404, message File not found
+10.240.1.50 - - [20/Dec/2018 06:34:25] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:34:25] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:25] "GET / HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:34:25] code 404, message File not found
+10.240.0.64 - - [20/Dec/2018 06:34:25] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:34:26] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:34:26] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.64 - - [20/Dec/2018 06:34:28] "GET /readme.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:29] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:34:29] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:34:35] code 404, message File not found
+10.240.0.213 - - [20/Dec/2018 06:34:35] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.64 - - [20/Dec/2018 06:34:36] "GET /readme.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:34:36] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:34:43] "GET /readme.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:34:43] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:34:44] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:34:46] "GET /draft.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:46] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:47] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:34:49] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.191', 44118)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.1.30 - - [20/Dec/2018 06:34:52] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:53] "GET /readme.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:34:54] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:34:59] "GET /draft.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:35:00] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:02] "GET / HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:35:04] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:35:10] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:10] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:35:16] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:35:16] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:35:19] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:35:25] "GET /UNP.pdf HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:31] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:36] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.50', 49488)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.1.191 - - [20/Dec/2018 06:35:37] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:39] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:35:41] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:35:44] "GET /draft.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:36:14] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:36:19] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:36:25] code 404, message File not found
+10.240.1.191 - - [20/Dec/2018 06:36:25] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:36:46] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:36:59] "GET / HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:37:00] code 404, message File not found
+10.240.1.50 - - [20/Dec/2018 06:37:00] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.30 - - [20/Dec/2018 06:37:23] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:40:42] "GET / HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:40:43] code 404, message File not found
+10.240.0.213 - - [20/Dec/2018 06:40:43] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:40:46] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.50', 53178)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.0.64 - - [20/Dec/2018 06:40:47] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.0.64', 43746)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.0.213 - - [20/Dec/2018 06:40:53] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.0.213', 54814)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.1.30 - - [20/Dec/2018 06:40:54] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.30', 39428)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.1.50 - - [20/Dec/2018 06:40:55] "GET / HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:40:56] code 404, message File not found
+10.240.0.64 - - [20/Dec/2018 06:40:56] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:41:02] "GET /draft.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:41:11] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:41:46] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.30', 40224)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+10.240.0.64 - - [20/Dec/2018 06:42:03] "GET /draft.md HTTP/1.1" 200 -
+10.240.0.213 - - [20/Dec/2018 06:43:01] code 404, message File not found
+10.240.0.213 - - [20/Dec/2018 06:43:01] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.1.50 - - [20/Dec/2018 06:44:45] code 404, message File not found
+10.240.1.50 - - [20/Dec/2018 06:44:45] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.64 - - [20/Dec/2018 06:44:45] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:44:50] "GET / HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:45:01] "GET /draft.md HTTP/1.1" 200 -
+10.240.1.50 - - [20/Dec/2018 06:45:07] "GET /readme.md HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:45:09] "GET /UNP.pdf HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('10.240.1.30', 42674)
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/socketserver.py", line 305, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 331, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib/python3.4/socketserver.py", line 344, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib/python3.4/socketserver.py", line 673, in __init__
+    self.handle()
+  File "/usr/lib/python3.4/http/server.py", line 398, in handle
+    self.handle_one_request()
+  File "/usr/lib/python3.4/http/server.py", line 386, in handle_one_request
+    method()
+  File "/usr/lib/python3.4/http/server.py", line 680, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/usr/lib/python3.4/http/server.py", line 839, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/usr/lib/python3.4/shutil.py", line 70, in copyfileobj
+    fdst.write(buf)
+  File "/usr/lib/python3.4/socket.py", line 394, in write
+    return self._sock.send(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+10.240.1.50 - - [20/Dec/2018 06:45:55] code 404, message File not found
+10.240.1.50 - - [20/Dec/2018 06:45:55] "GET /favicon.ico HTTP/1.1" 404 -
+10.240.0.64 - - [20/Dec/2018 06:46:02] "GET / HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:46:37] "GET /blog.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:46:57] "GET /blog.md HTTP/1.1" 200 -
+10.240.0.64 - - [20/Dec/2018 06:47:26] "GET /draft.md HTTP/1.1" 200 -
+10.240.1.191 - - [20/Dec/2018 06:47:53] "GET / HTTP/1.1" 200 -
+10.240.1.30 - - [20/Dec/2018 06:47:54] code 404, message File not found
+10.240.1.30 - - [20/Dec/2018 06:47:54] "GET /favicon.ico HTTP/1.1" 404 -
+^C
+Keyboard interrupt received, exiting.

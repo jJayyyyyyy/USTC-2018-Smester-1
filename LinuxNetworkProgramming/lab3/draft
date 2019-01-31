@@ -1,0 +1,70 @@
+##	实验内容
+
+*	测试开发环境
+
+	```
+	$ cd /root/LinuxKernel
+	$ git clone https://github.com/jjayyyyyyy/linuxnet.git
+	$ cd linuxnet/lab3
+	$ make rootfs
+	```
+
+##	参考链接
+
+*	https://github.com/mengning/linuxnet/tree/master/lab3
+
+*	
+
+*	原实验链接
+
+	[初始化MenuOS系统的网络功能，跟踪分析TCP协议](https://www.shiyanlou.com/courses/1198/labs/9010/document)
+
+	*	简介
+
+		之前我们已经将 `TCP` 网络程序的服务端 `replyhi` 集成到 `MenuOS` 中了, 而且可以正常启动 `TCP` 服务, 方便我们跟踪 `socket`, `bind`, `listen`, `accept` 几个 `API` 来调用内核处理函数.
+
+		但是我们启动的 `TCP server` 并不能正常对外提供服务, 因为 `MenuOS` 没有初始化网络设备 (包括本地回环 `loopback` 设备), 因此它无法接收到任何网络请求.
+
+		接下来我们需要搞清楚如何激活 `Linux` 网络设备, 并将 `MenuOS` 系统的网络设备用简便的方式配置好, 使我们可以正常地运行 `TCP` 网络程序的 `server` 和 `client`。
+
+	*	如何激活Linux网络设备接口
+
+		Linux发行版一般在启动过程中自动激活网络设备接口的方式
+
+		具体内容可以参考配套的专栏文章或视频课程
+
+	*	在 `MenuOS` 中手工编码激活网络设备接口 `lo`
+
+		具体内容可以参考配套的专栏文章或视频课程
+
+	*	将TCP网络通信程序的客户端也集成到 `MenuOS` 系统中
+
+		接下来我们需要将 `C/S` 方式的网络通信程序的客户端也集成到 `MenuOS` 系统中, 成为 `MenuOS` 系统的命令 `hello`, 实际上我们已经给大家集成好了, 进入 `lab3` 目录执行 `make rootfs`, 脚本就可以帮助我们自动编译, 自动生成根文件系统, 还会帮我们运行 `MenuOS` 系统. 详细命令如下
+
+		```bash
+		cd LinuxKernel  
+		git clone https://github.com/mengning/linuxnet.git
+		cd linuxnet/lab3
+		make rootfs
+		```
+
+		在运行起来的 `MenuOS` 中执行 `help` 命令可以看到其中不止有 `replyhi`, 也有了 `hello` 命令, 我们先执行 `replyhi`, 然后执行 `hello`.
+
+	*	跟踪分析TCP协议
+
+		```
+		qemu -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -s -S
+
+	*	TCP的三次握手源代码跟踪分析，跟踪找出设置和发送SYN/ACK的位置，以及状态转换的位置
+
+		TCP的三次握手从用户程序的角度看就是客户端connect和服务端accept建立起连接时背后完成的工作，在内核socket接口层这两个socket API函数对应着sys_connect和sys_accept函数，进一步对应着sock->opt->connect和sock->opt->accept两个函数指针，在TCP协议中这两个函数指针对应着tcp_v4_connect函数和inet_csk_accept函数。
+
+	*	Reference
+
+		https://ubuntuforums.org/showthread.php?t=1945606
+
+		http://lib.csdn.net/article/linux/55394
+
+		https://cboard.cprogramming.com/linux-programming/43261-ioctl-request-get-hw-address.html
+
+		http://219.219.220.231/raw-attachment/wiki/LinuxStart/BuildAndRunLinuxSystem.pdf

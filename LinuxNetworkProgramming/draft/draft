@@ -1,0 +1,904 @@
+
+
+
+http://staff.ustc.edu.cn/~mengning/2013.html
+http://teampal.mc2lab.com/projects/fwn/wiki/NP2015
+http://teampal.mc2lab.com/projects/fwn/wiki/NP2013
+https://www.google.com/search?q=tcp+linux+内核+分析+gdb
+https://blog.csdn.net/larryliuqing/article/details/27230001
+https://www.shiyanlou.com/courses/reports/1356952
+https://www.shiyanlou.com/courses/1198
+https://github.com/mengning/linuxnet/blob/master/np2018.md
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/socket.c
+https://www.shiyanlou.com/courses/1198/labs/9010/document
+https://github.com/mengning/linuxnet/tree/master/lab2
+https://github.com/mengning/linuxnet/blob/master/np2018.md
+https://www.kernel.org/
+http://staff.ustc.edu.cn/~mengning/
+https://www.shiyanlou.com/courses/reports/1356889
+https://coding.net/u/mengning/p/mengning/git/blob/master/ase/ase2018.md
+https://cloud.tencent.com/info/6105d9a5ec1675228f9c221433f4f71b.html
+https://www.shiyanlou.com/courses/reports/1356844
+https://www.shiyanlou.com/courses/reports/1356187
+
+
+
+
+
+[linux内核编译与调试方法](https://www.cnblogs.com/syw-casualet/p/5271369.html)
+
+
+
+
+跟踪代码
+
+
+
+TCP
+连接建立
+收发
+断开
+
+socket
+系统调用---kernel
+位置
+
+
+
+callin
+
+callback
+
+Server -------------- Client
+
+bind                  connect
+                          |
+accept                    |
+                          |
+      x<------ SYN -------
+
+找到x
+
+
+callback
+中断，向上回调
+
+
+
+
+
+注册 inet_init
+fs_initcall(inet_init);
+
+
+static int __init inet_init(void){
+	
+}
+
+把回调函数注册到其他模块里面去
+
+
+rc = proto_register(...)
+
+&icmp_protocol,
+
+
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/af_inet.c
+https://github.com/torvalds/linux/blob/5d01410fe4d92081f349b013a2e7a95429e4f2c9/net/ipv4/tcp_ipv4.c
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/
+
+
+
+执行过程/执行流
+callin 从下往上
+caller 从上往下
+tasklet 内核线程，一直提供服务
+
++ 数据结构
+
+
+实验3
+
+
+qemu -kernel ../../linux-3.18.6/arch/x86/boot/bzImage -initrd ../rootfs.img -s -S
+
+
+file linux-3.18.6/vmlinux # 在gdb界面中targe remote之前加载符号表
+target remote:1234 # 建立gdb和gdbserver之间的连接
+break start_kernel # 断点的设置可以在target remote之前，也可以在之后
+c                  # 按c 让qemu上的Linux继续运行
+
+
+
+b inet_init
+net/ipv4/af_inet.c, line 1675
+
+c
+
+list  # 查看代码
+
+print tcp_prot  # 查看变量的内容
+
+
+n # 直到 1716 , if (inet_add_protocol(&tcp_protocol, IPPROTO_TCP) < 0)
+
+print tcp_protocol # 查看 tcp_protocol
+
+
+n # 直到 line 1745, tcp_init()
+
+si # tcp_init() at net/ipv4/tcp.c:3047
+
+
+
+c # 启动系统
+
+
+# 准备 callin 跟踪
+
+
+ctrl+C 退出 continue
+
+ctrl+c 退出 menuOS, 重启menuOS
+
+gdb
+target remote:1234
+
+c
+c
+
+
+b SyS_accept
+b SyS_connect
+
+c
+
+
+b tcp_v4_rcv
+
+replyhi
+hello
+
+
+
+tcp头
+
+1602 th = tcp_hdr(skb);
+
+gdb optimized out
+
+https://blog.csdn.net/cws1214/article/details/12023093
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp_ipv4.c
+case TCP_TW_SYN:{}
+
+
+b do_time_wait
+
+c
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp_ipv4.c#1709
+do_time_wait:
+
+
+接到连接请求后，怎么accept，三次握手的过程
+
+
+
+struct proto tcp_prot = {
+	.connect
+	.
+}
+
+
+<!-- b tcp_v4_accept -->
+b tcp_v4_connect
+b tcp_v4_rcv
+b inet_csk_accept
+
+menuos
+replyhi
+
+停在 inet_csk_accept
+net/ipv4/
+
+318
+error = inet_csk_wait_for_connect(sk, timeo);
+
+menuos
+hello
+
+停在 tcp_v4_connect
+
+
+c
+继续执行，下一个停在 tcp_v4_rcv
+
+
+希望停在 1724
+case TCP_TW_ACK:
+(TimeWait)
+
+验证是否为同一个client
+
+目标
+接到一个sk_buf
+accept阻塞
+返回
+过程
+
+
+connect --- accept --- 返回
+
+
+2个入口
+accept 监听哪个队列
+维持三次握手的状态
+阻塞等待对方ACK
+出队入队的函数相近
+
+client 也需要 recv
+continue 完成还需要 recv
+
+
+
+
+1. inet_csk_accept
+
+error_csk_wait_for_connect
+
+for(;;)
+死循环，检验
+reqsk_queue_empty()
+
+如果是空的，就睡眠
+不是空的，非空break
+
+出队
+取出 req
+req = reqsk_queue_remove(queue);
+newsk = req->sk;
+
+
+
+搜 reqsk_queue_remove
+入队
+reqsk_queue_add
+
+
+reqsk_queue_remove(queue)
+这个queue是哪个queue
+是当前sk的队列
+
+
+接收数据端有一个查表的行为
+case SYN:
+	*sk2 = inet_lookup_listner()
+	sk = sk2
+	goto process
+
+
+
+process:
+
+什么时候变成 established
+
+下面的代码肯定有一块要add
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp_ipv4.c#1709
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/include/linux/skbuff.h
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/kernel/sys_ni.c#37
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp.c
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/af_inet.c
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/socket.c
+
+https://github.com/mengning/linuxnet/blob/master/lab3/Makefile
+https://www.cnblogs.com/syw-casualet/p/5271369.html
+https://www.google.com/search?ei=b84IXO3yAeeJ0gLVu6j4Cg&q=tcp+value+has+been+optimized+out
+https://blog.csdn.net/cws1214/article/details/12023093
+https://github.com/torvalds/linux/blob/master/net/ipv4/tcp.c
+https://github.com/torvalds/linux/tree/5d01410fe4d92081f349b013a2e7a95429e4f2c9/net/ipv4
+https://github.com/torvalds/linux/blob/5d01410fe4d92081f349b013a2e7a95429e4f2c9/net/ipv4/tcp_ipv4.c
+
+
+
+
+
+20181213
+
+TCP
+
+起始字节号为什么随机 --- 防止网络攻击
+
+
+端口号
+
+IANA
+
+BSD
+
+
+常用端口号
+7 echo
+20 ftp, data
+21 ftp, control
+22 ssh
+
+
+并发服务器
+
+<本机ip:port, 对端ip:port>
+
+
+fork()
+简单，但是开销大
+
+pthread
+多线程
+
+epoll
+
+
+
+
+两种需求
+
+大量成块的数据
+
+交互的数据，短的数据
+
+处理算法不同
+
+通常TCP在接到数据时并不立即发送ACK，而是推迟，以便将ACK于需要发送的数据一起发送，"数据捎带ACK"
+不适合telnet等交互短数据
+
+绝大多数实现采用200ms延时, 检测超时使用500ms的定时器
+
+
+RFC896, Nagle算法，停等
+交互数据产生的小分组，在广域网上会增加
+
+
+停等协议
+
+
+
+滑动窗口
+
+窗口大小
+接收缓存的大小是该链接上所能够通告的最大窗口的大小
+
+
+慢启动 slow start
+
+使新分组进入网络的速率与另一端返回确认的速率相同
+为发送方增加一个窗口---拥塞窗口
+
+拥塞窗口大小指数级增加
+
+
+
+拥塞控制
+
+
+拥塞控制算法
+
+初始设置门限临界值为64kB，若发生超时
+
+
+慢启动与拥塞避免
+
+快速重传与快速恢复
+
+
+
+
+
+任务1:TCP的三次握手源代码跟踪分析，跟踪找出设置和发送SYN/ACK的位置，以及状态转换的位置
+
+TCP的三次握手从用户程序的角度看就是客户端connect和服务端accept建立起连接时背后的完成的工作，在内核socket接口层这两个socket API函数对应着sys_connect和sys_accept函数，进一步对应着sock->opt->connect和sock->opt->accept两个函数指针，在TCP协议中这两个函数指针对应着tcp_v4_connect函数和inet_csk_accept函数。
+
+
+terminal1
+cd lab3
+make -s -S
+
+
+terminal2
+
+gdb
+file
+target remote:1234
+c
+
+
+
+
+
+tcp握手和挥手
+
+跟踪状态转换的函数
+
+找发送的位置和状态转换的位置
+
+11个状态
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/include/net/tcp_states.h
+{
+
+}
+
+
+
+tcp_set_state
+状态转换
+
+
+b tcp_ecn_send_
+
+b tcp
+第一次握手
+
+
+
+为什么没有 SYN_RCVD
+
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/include/net/tcp_states.h
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp.c
+
+
+1917
+void tcp_set_state(struct sock *sk, int state){}
+
+
+2024
+void tcp_close(struct sock *sk, long timeout)
+
+
+b tcp_close()
+
+sk=0xc7bb0560, state=
+停下后
+
+b tcp_set_state()
+
+sk=0xc7bb0ac0, state=
+
+
+bt 调用栈 backtrace
+
+finish
+
+n
+
+
+同时 发送 fin
+
+tcp_input.c
+5581
+tcp_rcv_state_process
+
+两个都变成time wait 1
+
+tcp/ip 状态图，同时 closing
+
+5832
+
+
+
+
+关键是停在 tcp_set_state 设断点
+
+同时关闭, 也就是 发完 FIN, 还没收到 ACK 却先收到 FIN
+这时变成 CLOSING
+
+https://coolshell.cn/articles/1484.html
+https://blog.csdn.net/wenqian1991/article/details/40110703
+
+
+
+
+inet_init()
+
+tcp_rcv_
+
+
+ip
+.queue_xmit = ip_queue_xmit
+
+
+tcp_rcv()
+
+
+
+
+1214
+
+b SYSC_ [tab]
+
+b SYSC_accept4
+b SYSC_connect
+b SYSC_recvfrom
+c
+
+
+replyhi
+SYSC_accept4
+c
+
+hello
+SYSC_connect
+socket.c  #1690
+
+
+b net/socket.c:1707
+c
+
+step
+net/ipv4/aff_inet.c
+
+__inet_stream_connect
+b net/ipv4/af_inet.c:592
+
+
+net/ipv4/tcp_ipv4.c:153
+int tcp_v4_connect(
+看注释
+
+
+
+err = tcp_connect(sk);
+
+b tcp_connect
+net/ipv4/tcp_output.c:3092
+
+skb socket buffer
+
+
+
+static void tcp_connect_init(
+
+
+buff = alloc_skb_fclone(
+
+tcp_init_nondata_skb
+
+tcp_transmit_skb
+c
+看注释
+
+
+
+th = tcp+hrd(skb)
+
+th->seq = htonl(tcb->seq)
+
+
+结构体强制转换--->C语言实现多态
+
+
+
+call back 回调
+
+tcp_v4_rcv(struct sk_buff *skb)
+
+ip_hdr *iph
+tcp_hdr *th
+sock *sk
+
+
+对数据进行解析处理
+
+th = tcp_hdr(skb)
+
+skb_transport_header()
+
+return skb->head + skb->transport_header
+
+th = tcp_hdr(skb), th 是tcp头的指针
+
+
+http://codelab.shiyanlou.com/source/xref/linux-3.18.6/net/ipv4/tcp_ipv4.c
+
+#1629
+TCP_SKB_CB(skb)->seq = ntohl(th->seq);
+解包
+
+
+状态机转换
+
+
+1635	sk = __inet_lookup_skb(&tcp_hashinfo, skb, th->source, th->dest);
+
+
+
+
+任务4变成实验1
+1. udp_client, udp_server, 单独执行, 互相发送数据
+2. 集成到 menuOS, 模仿 tcp 的做法, main 改个名字， 注册到 menu
+   https://github.com/mengning/linuxnet/tree/master/lab3
+   menu.c , config 实验三
+   重新编译
+
+
+
+3. UDP 发送数据, send, sendto
+4. 接收数据的过程, 找到底层回调的地方, inet_init() 和 tcp_recv 对应，有个 udp_recv send
+   接收数据，并放入队列
+
+
+5. UDP 接收 recvfrom() 接收数据的过程，从接收队列取出数据
+
+
+6. 实验目标
+   demo并跟踪几个关键点 sendto, recvfrom
+   写一篇博客，分析UDP协议的相关代码
+
+
+
+以上完成后，传输层完成了
+下周开始 ip 层
+路由表
+
+
+总体目标，对网络体系结构了解，用linux下的C代码进行验证
+
+
+
+
+
+
+
+blog
+
+sendto
+sys_sendto
+inet_sendmsg					net/ipv4/af_inet.c:723
+sk->sk_prot->sendmsg(iocb, sk, msg, size);
+udp_sendmsg						net/ipv4/udp.c:863
+
+if (!corkreq) {					net/ipv4/udp.c:1038
+	skb = ip_make_skb()			net/ipv4/udp.c:1039
+	...
+
+	err = udp_send_skb()		net/ipv4/udp.c:1044
+}
+
+
+static int udp_send_skb(){}		net/ipv4/udp.c:783
+
+
+net/ipv4/udp.c:811
+else if (skb->ip_summed == CHECKSUM_PARTIAL) { /* UDP hardware csum */
+	# net/ipv4/udp.c:813
+	udp4_hwcsum(skb, fl4->saddr, fl4->daddr);
+	goto send;
+} 
+
+void udp4_hwcsum(struct sk_buff *skb, __be32 src, __be32 dst)
+708{
+
+
+路由信息表
+
+当地人对周围世界的了解
+问路
+
+arp 只有一种协议更新缓存
+
+路由表有很多种更新方式
+
+
+
+next-hop
+
+
+host specific ( 路由表过于庞大 )
+network specific
+
+TCP/IP
+使用基于 network specific 的路由协议
+
+
+BGP 边界网关
+
+跨网
+
+
+
+作业
+
+封包拆包
+查表
+
+
+
+af_inet.c
+inet_init()
+
+
+arp_init
+
+ip_init
+
+更新和查询
+
+
+1. ARP 如何更新 arp cache
+2. ARP 缓存的数据结构和初始化过程
+3. 如何从IP地址解析出对应的MAC
+4. IP数据包的 收 / 发 过程
+5. 路由表的结构和初始化过程
+6. 通过目的 ip 查询路由表，得到下一跳的ip地址的过程
+
+
+1.	IP数据包的收或发的过程，传输层协议数据收发的延伸
+
+	ip 发送, 接收
+
+	发送
+
+		*	tcp
+
+			https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/tcp_output.c#1072
+
+			err = icsk->icsk_af_ops->queue_xmit(sk, skb, &inet->cork.fl);
+
+			ip_queue_xmit
+
+		*	udp
+
+			ip_send_skb
+
+	接收
+
+		https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/af_inet.c#L1671
+
+		ip_rcv() ---> handler, tcp_v4_rcv
+
+2.	路由表的结构和初始化过程
+
+	ip 协议初始化过程中包含路由表的初始化，主要代码见 route.c 及 fib*.c
+
+	inet_init ---> ip init
+
+	ip 协议哪里初始化
+
+	[af_inet.c, ip_init()](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/af_inet.c#L1740)
+
+	forwarding information base 转发信息表, 路由表, fib
+
+	[ip_init]()
+
+	[ip_rt_init]()
+
+	[ip_fib_init](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/fib_frontend.c#L1170)
+
+	[fib_trie_init](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/fib_trie.c#L1947)
+
+3.	通过目的IP查询路由表的到下一跳的IP地址的过程, fib_lookup 为起点
+
+	[fib_lookup](https://elixir.bootlin.com/linux/v3.18.6/source/include/net/ip_fib.h#L222)
+
+	[fib_table_lookup](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/fib_trie.c#L1397)
+
+	输入输出是什么
+
+	[FIB](https://en.wikipedia.org/wiki/Forwarding_information_base)
+
+4.	ARP缓存的数据结构及初始化过程
+
+	参照 tcp、udp 的初始化过程查找相关代码 arp 初始化，其中包括 ARP 缓存的初始化
+
+	inet_init
+
+	[inet_init() ---> arp_init()](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/af_inet.c#L1734)
+
+	[arp_init()](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c#L1293)
+
+	neighbour, 记录
+
+	使用 arp 的四种情况
+
+	[]()
+
+5.	ARP协议如何更新ARP缓存，arp.c
+
+	输出模块
+
+	高速
+
+	[arp_process](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c#L722)
+
+	/* Update our ARP tables */
+
+	arp_create
+
+	[arp_rcv](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c#L951)
+
+	[链路层执行 func 后 调用  arc_rcv ](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c#L1286)
+
+	https://elixir.bootlin.com/linux/v3.18.6/source/net/ethernet/eth.c
+
+6.	如何将IP地址解析出对应的MAC地址， arp_find
+
+	从 arp 缓存中 查找 ip->mac
+
+	[arp_find()](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c#L466)
+
+	https://elixir.bootlin.com/linux/v3.18.6/source/net/ethernet/eth.c#L133
+
+	https://elixir.bootlin.com/linux/v3.18.6/source/net/ethernet/eth.c#L372
+
+	https://elixir.bootlin.com/linux/v3.18.6/source/net/ethernet/eth.c#L385
+
+	发送
+
+		路由 ---> ip
+
+		发送出去 ---> MAC
+
+		哪里调用的 arp_find()
+
+
+loop back
+
+lo
+
+https://arthurchiao.github.io/blog/gratuitous-arp-cn-zh/
+
+
+resolved
+
+pending
+
+
+arp cache, 只有本地网络的ip地址, 局部的, 不会有 github.com 的ip
+
+
+生成树协议 STP 防止环状转发风暴
+
+LA 链路聚合协议 trunking
+
+
+
+ip_queue_xmit
+
+ip_local_out
+
+ip_local_out_sk
+
+
+neighbour.h#409
+
+driver.c#90, loopback
+
+
+
+分布式存储库
+
+DNS, 路由表
+
+$ host www.ietf.com
+
+essay --- the design philosophy of the darpa internet protocols
+
+
+课程项目
+
+简单的 http 客户端 集成到 menuos
+
+dns 解析出域名对应的ip
+
+socket
+
+http 请求，响应
+
+menuos 配置网络, dns, etc

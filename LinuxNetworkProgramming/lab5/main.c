@@ -349,8 +349,8 @@ int httpclient(int argc, char *argv[]){
 		serverSockaddr_in.sin_family = AF_INET;
 
 		// https://www.gnu.org/software/libc/manual/html_node/Inet-Example.html
-		// struct hostent * hostInfo = gethostbyname(hostname);
-		// serverSockaddr_in.sin_addr = * (struct in_addr *)hostInfo->h_addr;
+		struct hostent * hostInfo = gethostbyname(hostname);
+		serverSockaddr_in.sin_addr = * (struct in_addr *)hostInfo->h_addr;
 		serverSockaddr_in.sin_addr.s_addr = inet_addr("192.30.253.113");
 
 		// 服务器端口号
@@ -373,7 +373,7 @@ int httpclient(int argc, char *argv[]){
 	}else{
 		
 	}
-	
+	printf("test http\n");
 	return 0;
 }
 
@@ -399,6 +399,15 @@ int dns(){
 		_res.nscount = 1;
 		_res.nsaddr_list[0].sin_addr = server_in_addr;
 	}
+}
+
+void getResolvConf(){
+	char * filename = "/etc/resolv.conf";
+	FILE * fp = fopen(filename, "r");
+	char * buff[256];
+	fscanf(fp, "%s", buff);
+	printf("%s\n", buff);
+	fclose(fp);
 }
 
 int main()
