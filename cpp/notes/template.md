@@ -43,7 +43,7 @@
 
 *	例2, 写一个通用的 `stack`
 
-	```
+	```cpp
 	#include <iostream>
 
 	template <class ElemType>
