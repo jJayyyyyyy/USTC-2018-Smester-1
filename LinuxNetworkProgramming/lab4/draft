@@ -1,0 +1,76 @@
+##	ARP
+
+*	ARP（Address Resolution Protocol，地址解析协议）是将IP地址解析为以太网MAC地址（物理地址）的协议。
+
+	当主机或其他网络设备有数据要发送给另一个主机或设备时，它需要知道对方的IP地址。
+
+	但是仅仅有IP地址是不够的，因为IP数据报文必须封装成帧才能通过物理网络发送。因此发送方还需要有接收方的物理地址，
+
+	ARP协议的功能就是实现 IP ---> MAC 的映射
+
+*	帧格式
+
+	目的MAC地址，如果是ARP请求帧，因为它是一个广播帧（后面会介绍），所以要填上广播MAC地址——FF-FF-FF-FF，其目标为网络上的所有主机
+
+	源MAC地址，发送ARP帧的节点MAC地址
+
+##	源码
+
+*	[arp.c](https://elixir.bootlin.com/linux/v3.18.6/source/net/ipv4/arp.c)
+
+	[arp_hashfn](https://elixir.bootlin.com/linux/v3.18.6/source/include/net/arp.h#L12)
+
+
+*	ARP数据结构
+
+	https://elixir.bootlin.com/linux/v3.18.6/source/include/net/neighbour.h#L133
+
+	```c
+	struct neighbour {
+		struct neighbour __rcu	*next;
+		struct neigh_table	*tbl;
+		struct neigh_parms	*parms;
+		unsigned long		confirmed;
+		unsigned long		updated;
+		rwlock_t		lock;
+		atomic_t		refcnt;
+		struct sk_buff_head	arp_queue;
+		unsigned int		arp_queue_len_bytes;
+		struct timer_list	timer;
+		unsigned long		used;
+		atomic_t		probes;
+		__u8			flags;
+		__u8			nud_state;
+		__u8			type;
+		__u8			dead;
+		seqlock_t		ha_lock;
+		unsigned char		ha[ALIGN(MAX_ADDR_LEN, sizeof(unsigned long))];
+		struct hh_cache		hh;
+		int			(*output)(struct neighbour *, struct sk_buff *);
+		const struct neigh_ops	*ops;
+		struct rcu_head		rcu;
+		struct net_device	*dev;
+		u8			primary_key[0];
+	};
+	```
+
+*	删除arp缓存
+
+	$ sudo arp -d $ip
+
+	<br>
+
+##	ip
+
+*	[linux之路由知识之ip route 命令中的疑惑](https://blog.csdn.net/u011068702/article/details/53899537)
+
+*	[每天一个linux命令（55）：traceroute命令](http://www.cnblogs.com/peida/archive/2013/03/07/2947326.html)
+
+[【Linux 内核网络协议栈源码剖析】ARP地址解析协议](https://blog.csdn.net/wenqian1991/article/details/46814201)
+
+[【计算机网络】详解网络层（二）ARP和RARP](https://blog.csdn.net/wenqian1991/article/details/44133039)
+
+[【TCP/IP】IP：网际协议（寻址和路由）](https://blog.csdn.net/wenqian1991/article/details/44313045)
+
+[【Linux 内核网络协议栈源码剖析】网络栈主要结构介绍（socket、sock、sk_buff，etc）](https://blog.csdn.net/wenqian1991/article/details/46700177)
+
