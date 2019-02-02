@@ -10,13 +10,17 @@
 
 ##	资源推荐
 
-参考: http://www.ruanyifeng.com/blog/2019/02/weekly-issue-42.html
+*	参考: http://www.ruanyifeng.com/blog/2019/02/weekly-issue-42.html
 
-*	[Notable](https://github.com/fabiospampinato/notable)
+	[Notable](https://github.com/fabiospampinato/notable)
 
 	A note-taking app based on Markdown syntax.
 
-*	[为什么电路板大多是绿色的？](http://www.seeedstudio.com/blog/2017/07/23/why-are-printed-circuit-boards-are-usually-green-in-colour/)
+	[为什么电路板大多是绿色的？](http://www.seeedstudio.com/blog/2017/07/23/why-are-printed-circuit-boards-are-usually-green-in-colour/)
+
+*	[Linux 中 TTY 是什么意思](https://www.cnblogs.com/dongguolei/p/7975488.html)
+
+	[What does “TTY” stand for?](https://askubuntu.com/questions/481906/what-does-tty-stand-for)
 
 	<br>
 
