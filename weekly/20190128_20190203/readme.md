@@ -22,6 +22,12 @@
 
 	[What does “TTY” stand for?](https://askubuntu.com/questions/481906/what-does-tty-stand-for)
 
+*	[How to revert a commit already pushed to a remote repository](https://gist.github.com/gunjanpatel/18f9e4d1eb609597c50c2118e416e6a6)
+
+	```bash
+	git push origin +HEAD^:master
+	```
+
 	<br>
 
 ##	其他
