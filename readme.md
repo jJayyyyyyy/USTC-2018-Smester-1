@@ -62,6 +62,10 @@ It's my honor and pleasure to share my experience with you.
 
 	最后，有的课程在学期末会有补交作业和实验的机会，但是最好不要给自己和助教添麻烦，每次提交的时候 **double check** 总是没错的。
 
+*	每一门课程结束后, 软院信息化平台都会要求我们填写一个长长的问卷调查, 下面这个脚本可以帮你节省一些填写问卷的时间
+
+	[传送门](https://github.com/jJayyyyyyy/USTC-2018-Smester-1/tree/master/course_evaluation_autofill_script)
+
 <br>
 
 ##	我的课表
