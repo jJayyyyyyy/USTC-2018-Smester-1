@@ -86,3 +86,94 @@
 		return 0;
 	}
 	```
+
+*	实现矩阵的乘法, 矩阵元素类型可为 int, float, double, ...
+
+	```
+	#include <iostream>
+	#include <vector>
+	using namespace std;
+
+	template <class ElemType>
+	class Matrix
+	{
+	public:
+		vector<vector<ElemType>> matmul( vector<vector<ElemType>> & m1, vector<vector<ElemType>> & m2 )
+		{
+			vector<vector<ElemType>> ans;
+
+			int row1 = m1.size();
+			int row2 = m2.size();
+
+			if( row1 > 0 && row2 > 0 )
+			{
+				int col1 = m1[0].size();
+				int col2 = m2[0].size();
+				if( col1 > 0 && col2 > 0 )
+				{
+					if( col1 == row2 )
+					{
+						ans.resize( row1, vector<ElemType>(col2) );
+						for( int i = 0; i < row1; i++ )
+						{
+							for( int k = 0; k < col2; k++ )
+							{
+								ElemType sum = (ElemType)0;
+								for( int j = 0; j < col1; j++ )
+								{
+									sum += m1[i][j] * m2[j][k];
+								}
+								ans[i][k] = sum;
+							}
+						}
+					}
+				}
+			}
+
+			return ans;
+		}
+	};
+
+	void test_int_matmul()
+	{
+		// 矩阵乘法, int 类型
+		Matrix<int> matrix;
+		vector< vector<int> > m1(3, vector<int>(2));
+		m1[0][0] = 1;
+		m1[0][1] = 2;
+
+		m1[1][0] = 3;
+		m1[1][1] = 4;
+
+		m1[2][0] = 5;
+		m1[2][1] = 6;
+
+		vector< vector<int> > m2(2, vector<int>(2));
+		m2[0][0] = 1;
+		m2[0][1] = 2;
+
+		m2[1][0] = 3;
+		m2[1][1] = 4;
+		vector< vector<int> > m3 = matrix.matmul(m1, m2);
+		output(m3);
+	}
+
+	template <class ElemType>
+	void output(vector< vector<ElemType> > & matrix )
+	{
+		for( auto row : matrix )
+		{
+			for( auto col : row )
+			{
+				cout << col << ' ';
+			}
+			cout << '\n';
+		}
+	}
+
+	int main()
+	{
+		test_int_matmul();
+		return 0;
+	}
+	```
